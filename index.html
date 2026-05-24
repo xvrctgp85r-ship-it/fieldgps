@@ -534,6 +534,8 @@ $("x-kml").onclick=()=>{
 $("x-clear").onclick=()=>{ if(confirm("Delete ALL captures? Export first if unsure.")){ caps=[]; save(LS_CAPS,caps); render(); } };
 
 /* ---------------- boot ---------------- */
+$("btn-gps").addEventListener("click", startGPS);   // <-- was missing: Start/Stop GPS button
+$("gate").addEventListener("input", ()=>{ gateVal=parseFloat($("gate").value)||5; });
 refreshGroupSelect(); $("p-nlbl").textContent=$("p-n").value; render(); setMode("point");
 window.addEventListener("beforeunload",e=>{ if(shape&&shape.vertices.length){ e.preventDefault(); e.returnValue=""; } });
 </script>
