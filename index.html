@@ -1,231 +1,506 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Field GPS">
-<title>Bradford/Freer Field GPS</title>
+<meta name="theme-color" content="#0c0d0e">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAGcklEQVR42u2dTW7cMAxGHcHLtkAWuVcu02URFF3mMrlXFrlCFwEGqTvj8Y9IfqTetwrQNBbpZ5KSLerh2/cfE0LX1HABAg4EHAg4EHAg4EDAgYADAQcCDgQcCC0144KLPt6eLj8/Pr/jECIHAg60Xw9jvrL/mkE2asBEMwQcB1AAl7JwGNEwGiul4AhhojAlFeAQYaIeJYnhkGWiDCUp4TiPxdW7tb4IZnRRZc0jYNHlrpzH5fP3EyEyV8XC4R58vcT24SVCZC6GRZTTL9fdONoUiMw1sNDx8i5KxBGZU5Oh/ORtp+Tj7UnTkBksfChZN0ozhLR0ZDw+v2dcNtgybLWVmzkXFlNy3Y0iUiGkpSAjabQ4bI5ICGkpyJgqSp+PGSxks0x4immQQQiRg2PF5mIVxvkqJIqPJkjGNKrU+GiQAR8qcNyycMBUciDFOPPRRMiAiY0+8eSjQQZ8BMMBGRn5aJABH2FwQEZePpqUtUjKY7ZwXEUbMjryYRo8DPet6JOx0bP6YzYa4Rzrd00a1v+XYOQz+grV9ZV9lFv7knr5ayHmPD6/uz14JmlFJKHs/e7w1nZIwe8XfTzcHw4FMo7Nnzc2jBOZnDv4uVo3QQeX3dqQkm4rrHfkCAwbUZcubHJPOHTcFPL4hozB1Ofp04rOPHPxtXCBLNNShw3BFYiVGZDb6kCvizbncRuRIfUh2WIwIXwIweG8Hvrx9qTfp3zBh7+LdCOH3Q3TX8z2TzFGTmi5woZsKhFJMX3vS0sEct4jLxz4sHBIyxI2fMh4+fP68uc1KR/d707LEjaSxozUnmm5wkb2Nxd7mw7GBo+m/3AkamMdbldf/7dEHqzxwjNq8uIKh7Nhxdo+pQhRTdnmMqWGZ/HR0Ve6aaVqqZHI0qZvz5gN4xT4a5qmFk4oDsmll9M4VxZ1hcM6pwwSNqwr0/N3rfW1EFUqaPI1xmfaoj5bYZIygqUUpKgfHP+Hvo7gD1WKWpel54+zJHIg4ECp4Rg2p9hlFiIHstKMC77q96+fOOFg5DCdqiC7VHVswkJaQfJpJbwaVdhleWkGJ3JGNZHjerAd+RUPcNznAD4aZBz+V+AYlwz42NQwLsRBUY0AlUfi7OGUi2AnN8IfXumKui5pBckpZeSIegRHW1zf16TWbvk8ahFMrel9dz+cuWWjp5V1Tw3+5oia4yYBvFMEjuscQIZQQRr+zkmBBrVv4YgcqBMc5792R7FzsV0xicjxj+z6kFKQIuAwLgnHTFWCOzOIHAg4kAMcphOWYTOLRU45/yKMyIESwkEfUuC4n7bGkZrtjaecaNQTDrdDZUZgzm1548DfpyBF9nAYNWiuHTyMwkbwidT6Td2ZpJy/X/QhxVIXOOzOlakXPOzq0I6+all4r8RHlhPQ1GcriY7LO0CGeOps+s8EJzVF+b+luG1lig//L3rOXKiJw1up+EjnmX17ZTeOyeixSH0AscPgu9+IlugRyVuchpAhUZB6PsQLPvQRWQwyyldaU1m727awWZkPt96mRk5IeQDg4/O7fopZBAx/F8mtc3g+07IpxjmV2BlueyK1Jx8iIcS5TfZVk3tdNP2RGp+OuPjo84eQia5C93S5dQ43kDUvXdjkznDEOuvk1fcWCnktHSWtrGeZhR+7+O5WZVPvBWH/yBH+SG2vT1fq2V1TZRHTug/DBA4dPkxnMVLmWAxmdrYqthlcF0pi04fndH22ux+CC5fH1kX0iwmjEVqlFcHk0n22UjihfKr5E83G2ixPWtOxE6l5zByOW2jDx3kyrHOfR+SAj4xk+KUV+EhHhmvNAR+5yPAuSOEjERkBs5UVPkDkriucV18CprIrFsLHigf81+Vi1jngQ5+MKXCX/TofA3YwViNjim3BsG4zTWpjyZjCvwS7+uHWwmuF+z/JYhEfOQYPIeJkTDqdfe7yUaztkz4Zk9QHxusppkaWEfwcNUHk2O6dpFFky7DVuFfcmnA3hOSKIltQ1jREd9/Klq9QBQ/NO1BHyyIuvalpSwhRo2RXyhOPfAl2vG1HJJCSvWVQioSYZjvkLkQm4TZciWZbyfbK7kXk1l08cIfOT5HSTcJt961IRXLl+TlwDEdJ9rdCFeBQo6TMm8JScMRSQn8OWKlMw4hwdMFlwNOQB4XjLjEjH4x9EefKIuBApBVE5EDAgYADAQcCDgQcCDgQcCAEHAg4UAf9BXiIC9jhYjkuAAAAAElFTkSuQmCC">
+<title>Field GPS — Bradford/Freer</title>
 <style>
-/* ============================================================
-   FIELD GPS — Bradford/Freer property capture tool
-   Industrial field-instrument theme. Offline, no external deps.
-   ============================================================ */
-:root{
+:root, [data-theme="dark"]{
   --bg:#0c0d0e; --panel:#15171a; --panel2:#1d2025; --line:#2a2e34;
-  --ink:#e8eaed; --dim:#8b9099; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --ink:#e8eaed; --dim:#8b9099; --dim2:#5a6068;
   --green:#36d399; --amber:#fbbd23; --red:#f87272; --blue:#5aa9ff; --accent:#fbbd23;
+  --ring-bg:#23262b; --map-bg:#0a0d12; --map-grid:#1a2030; --shadow:0 6px 18px rgba(0,0,0,.45);
+  --sheet-bg:#15171a;
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}
-body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);font-size:16px;line-height:1.4}
-.wrap{max-width:560px;margin:0 auto;padding:12px 12px 80px}
-h1{font-size:15px;letter-spacing:.12em;text-transform:uppercase;margin:6px 2px 12px;color:var(--accent);font-weight:700}
-h1 small{display:block;color:var(--dim);font-size:11px;letter-spacing:.08em;margin-top:3px;font-weight:500}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
-.panel h2{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 10px}
-/* live fix readout */
-.readout{font-family:var(--mono);font-size:13px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:baseline}
-.readout .k{color:var(--dim)}
-.readout .v{text-align:right;font-variant-numeric:tabular-nums}
-.acc-badge{display:inline-block;padding:2px 10px;border-radius:999px;font-weight:700;font-family:var(--mono)}
-.acc-green{background:rgba(54,211,153,.16);color:var(--green)}
-.acc-amber{background:rgba(251,189,35,.16);color:var(--amber)}
-.acc-red{background:rgba(248,114,114,.16);color:var(--red)}
-.acc-none{background:#23262b;color:var(--dim)}
-.struck{text-decoration:line-through;color:var(--dim)}
-/* buttons */
-button{font-family:var(--sans);font-size:15px;font-weight:600;border:1px solid var(--line);
-  background:var(--panel2);color:var(--ink);border-radius:10px;padding:14px 12px;cursor:pointer;
-  width:100%;transition:transform .05s,background .15s}
-button:active{transform:scale(.985)}
-button.primary{background:var(--accent);color:#1a1400;border-color:var(--accent)}
-button.go{background:var(--green);color:#04231a;border-color:var(--green)}
-button.stop{background:var(--red);color:#2a0707;border-color:var(--red)}
-button.ghost{background:transparent}
-button:disabled{opacity:.4;cursor:not-allowed}
-.row{display:flex;gap:8px}
-.row>*{flex:1}
+[data-theme="sun"]{
+  --bg:#ffffff; --panel:#f4f5f6; --panel2:#e8eaed; --line:#c4c8cf;
+  --ink:#0a0a0a; --dim:#3a3f48; --dim2:#646871;
+  --green:#107c54; --amber:#a06800; --red:#a32424; --blue:#1a52a8; --accent:#a06800;
+  --ring-bg:#cdd0d6; --map-bg:#f0f1f3; --map-grid:#d4d8df; --shadow:0 4px 12px rgba(0,0,0,.18);
+  --sheet-bg:#ffffff;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;line-height:1.4;overflow:hidden;height:100%;height:100dvh;-webkit-user-select:none;user-select:none}
+#app{display:flex;flex-direction:column;height:100%;height:100dvh;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+button,select,input{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+
+/* ============ TOP BAR ============ */
+#topbar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;
+  background:var(--panel);border-bottom:1px solid var(--line);flex:0 0 auto}
+#topbar .ll{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--dim);display:flex;flex-direction:column;line-height:1.2}
+#topbar .ll b{color:var(--ink);font-weight:600}
+.acc-badge{display:inline-block;padding:4px 10px;border-radius:999px;font-weight:700;font-family:ui-monospace,"SF Mono",Menlo,monospace;
+  font-size:13px;letter-spacing:.02em;min-width:74px;text-align:center}
+.acc-green{background:rgba(54,211,153,.20);color:var(--green)}
+.acc-amber{background:rgba(251,189,35,.20);color:var(--amber)}
+.acc-red{background:rgba(248,114,114,.22);color:var(--red)}
+.acc-none{background:var(--ring-bg);color:var(--dim)}
+.icon-btn{width:40px;height:40px;border-radius:10px;background:var(--panel2);color:var(--ink);
+  display:inline-flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--line)}
+.icon-btn:active{transform:scale(.94)}
+.icon-btn.on{background:var(--accent);color:#1a1400;border-color:var(--accent)}
+.sync-dot{width:10px;height:10px;border-radius:50%;background:var(--dim2);position:absolute;top:6px;right:6px;
+  box-shadow:0 0 0 2px var(--panel)}
+.sync-dot.s-syncing{background:var(--blue);animation:pulse 1.2s infinite}
+.sync-dot.s-synced{background:var(--green)}
+.sync-dot.s-error{background:var(--red)}
+.sync-dot.s-idle{background:var(--amber)}
+.sync-dot.s-off{background:var(--dim2)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ============ MAP ============ */
+#map-area{position:relative;flex:1 1 auto;background:var(--map-bg);overflow:hidden;touch-action:none}
+#map{position:absolute;inset:0;width:100%;height:100%;display:block;background:var(--map-bg)}
+#map-controls{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:6px;z-index:5}
+#map-controls .icon-btn{background:rgba(21,23,26,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+[data-theme="sun"] #map-controls .icon-btn{background:rgba(244,245,246,.92)}
+#scale-bar{position:absolute;bottom:12px;left:12px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim);
+  background:rgba(21,23,26,.7);padding:3px 8px;border-radius:4px;pointer-events:none;z-index:5}
+[data-theme="sun"] #scale-bar{background:rgba(244,245,246,.85);color:var(--dim)}
+#map-hint{position:absolute;top:12px;left:12px;font-size:12px;color:var(--ink);background:rgba(21,23,26,.85);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 10px;border-radius:8px;pointer-events:none;
+  max-width:60%;z-index:5;display:none}
+#map-hint.show{display:block}
+[data-theme="sun"] #map-hint{background:rgba(244,245,246,.92)}
+
+/* ============ ACTION AREA ============ */
+#action{flex:0 0 auto;background:var(--panel);border-top:1px solid var(--line);padding:10px 12px 14px}
+.meta-row{display:flex;gap:6px;align-items:center;margin-bottom:8px;overflow-x:auto;scrollbar-width:none}
+.meta-row::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+  border-radius:999px;padding:7px 12px;font-size:13px;display:inline-flex;align-items:center;gap:4px;min-height:32px}
+.chip.has-content{border-color:var(--accent);color:var(--accent)}
+.chip select{background:transparent;border:0;color:inherit;font-size:13px;padding-right:14px;
+  appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--dim) 50%),linear-gradient(135deg,var(--dim) 50%,transparent 50%);
+  background-position:calc(100% - 9px) center,calc(100% - 5px) center;background-size:4px 4px;background-repeat:no-repeat}
+.chip.cf-good{border-color:var(--green);color:var(--green)}
+.chip.cf-anchor{border-color:var(--blue);color:var(--blue)}
+.chip.cf-rough{border-color:var(--amber);color:var(--amber)}
+
+.mode-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px;background:var(--panel2);
+  border-radius:10px;padding:3px;border:1px solid var(--line)}
+.mode-tabs button{padding:8px 4px;font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--dim);
+  border-radius:7px;background:transparent;text-transform:uppercase}
+.mode-tabs button[aria-selected="true"]{background:var(--accent);color:#1a1400}
+
+#capzone{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:6px}
+.aux-btn{width:56px;height:56px;border-radius:50%;background:var(--panel2);color:var(--ink);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:22px;flex:0 0 auto}
+.aux-btn:disabled{opacity:.3}
+.aux-btn:active:not(:disabled){transform:scale(.94)}
+.aux-btn.go{background:var(--green);color:#04231a;border-color:var(--green)}
+
+#capwrap{position:relative;width:108px;height:108px;flex:0 0 auto}
+#capwrap svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform:rotate(-90deg)}
+#capwrap .ring-bg{stroke:var(--ring-bg);stroke-width:5;fill:none}
+#capwrap .ring-fg{stroke:var(--accent);stroke-width:5;fill:none;stroke-linecap:round;
+  transition:stroke-dashoffset .12s linear, stroke .2s}
+#capwrap.acc-green .ring-fg{stroke:var(--green)}
+#capwrap.acc-amber .ring-fg{stroke:var(--amber)}
+#capwrap.acc-red .ring-fg{stroke:var(--red)}
+#capwrap.acc-none .ring-fg{stroke:var(--ring-bg)}
+#btn-capture{position:absolute;inset:10px;border-radius:50%;background:var(--accent);color:#1a1400;
+  font-size:14px;font-weight:700;letter-spacing:.06em;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:var(--shadow);text-transform:uppercase}
+#btn-capture:active:not(:disabled){transform:scale(.95)}
+#btn-capture:disabled{background:var(--ring-bg);color:var(--dim);box-shadow:none}
+#btn-capture .icon{font-size:30px;line-height:1;margin-bottom:2px}
+#btn-capture .lbl{font-size:10px;line-height:1.1}
+#btn-capture.busy{background:var(--blue);color:#04141a}
+
+#caphint{text-align:center;color:var(--dim);font-size:12px;margin-top:8px;min-height:18px;
+  font-family:ui-monospace,Menlo,monospace}
+#caphint b{color:var(--ink)}
+
+/* GPS-off overlay */
+#gps-overlay{position:fixed;inset:0;background:rgba(12,13,14,.92);z-index:50;
+  display:flex;align-items:center;justify-content:center;padding:32px;text-align:center;
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+[data-theme="sun"] #gps-overlay{background:rgba(255,255,255,.96)}
+#gps-overlay.hidden{display:none}
+#gps-overlay h1{font-size:20px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+#gps-overlay p{color:var(--dim);font-size:14px;margin:0 0 24px;max-width:300px}
+#gps-overlay button{font-size:16px;padding:18px 32px;background:var(--green);color:#04231a;font-weight:700;
+  border-radius:14px;min-width:200px;letter-spacing:.05em;text-transform:uppercase}
+
+/* ============ SHEETS ============ */
+#sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;
+  transition:opacity .2s;z-index:60}
+#sheet-bg.show{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-height:85dvh;background:var(--sheet-bg);
+  border-radius:16px 16px 0 0;transform:translateY(100%);transition:transform .25s ease-out;
+  z-index:61;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom);
+  box-shadow:0 -10px 30px rgba(0,0,0,.5)}
+.sheet.show{transform:translateY(0)}
+.sheet-grab{width:36px;height:4px;background:var(--line);border-radius:2px;margin:8px auto 0}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--line)}
+.sheet-head h2{margin:0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:700}
+.sheet-body{overflow-y:auto;padding:14px 16px 20px;-webkit-overflow-scrolling:touch}
+.fld{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:12px 0 5px;font-weight:600}
+.fld:first-child{margin-top:0}
+.inp{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--ink);
+  border-radius:9px;padding:10px 12px;font-size:15px}
+.inp:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.row{display:flex;gap:8px}.row>*{flex:1}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-label.fld{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:10px 0 4px}
-input,select,textarea{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--ink);
-  border-radius:9px;padding:11px 10px;font-size:15px;font-family:var(--sans)}
-input[type=number]{font-family:var(--mono)}
-textarea{resize:vertical;min-height:42px}
-/* mode tabs */
-.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px}
-.tabs button{padding:12px 4px;font-size:13px;letter-spacing:.04em}
-.tabs button[aria-selected=true]{background:var(--accent);color:#1a1400;border-color:var(--accent)}
-.mode{display:none}.mode.active{display:block}
-.hint{font-size:12px;color:var(--dim);margin:8px 2px 0;line-height:1.45}
-.math{font-family:var(--mono);font-size:11px;color:var(--blue);background:#0f1620;border:1px solid #1c2a3a;
-  border-radius:8px;padding:9px 10px;margin-top:8px;white-space:pre-wrap;word-break:break-word}
+.btn{width:100%;padding:13px;border-radius:10px;background:var(--panel2);color:var(--ink);
+  border:1px solid var(--line);font-size:15px;font-weight:600;text-align:center}
+.btn.primary{background:var(--accent);color:#1a1400;border-color:var(--accent)}
+.btn.go{background:var(--green);color:#04231a;border-color:var(--green)}
+.btn.stop{background:transparent;border-color:#5a2a2a;color:var(--red)}
+.btn:disabled{opacity:.4}
+.hint{color:var(--dim);font-size:12px;line-height:1.5;margin-top:6px}
+.hint code,.kbd{font-family:ui-monospace,Menlo,monospace;background:var(--panel2);padding:1px 5px;border-radius:3px;font-size:11.5px}
+
 /* captures list */
-.cap-group{border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden}
-.cap-group>summary{list-style:none;cursor:pointer;padding:11px 12px;background:var(--panel2);
-  font-size:13px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-.cap-group>summary::-webkit-details-marker{display:none}
-.cap-group .count{color:var(--dim);font-weight:500;font-family:var(--mono);font-size:12px}
-.cap{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:9px 12px;border-top:1px solid var(--line);font-size:13px}
-.cap .meta{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:2px}
-.cap .tag{font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:5px;margin-left:6px}
+.cap-grp{margin-bottom:10px}
+.cap-grp-hdr{font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--dim);padding:6px 4px;font-weight:700;
+  display:flex;justify-content:space-between;align-items:center}
+.cap-grp-hdr .ct{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--dim2)}
+.cap-row{display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:8px;background:var(--panel2);
+  margin-bottom:4px;border:1px solid var(--line)}
+.cap-row .thumb{width:40px;height:40px;border-radius:6px;background:var(--ring-bg);flex:0 0 auto;display:flex;
+  align-items:center;justify-content:center;font-size:18px;color:var(--dim);background-size:cover;background-position:center}
+.cap-row .body{flex:1 1 auto;min-width:0}
+.cap-row .lbl{font-weight:600;font-size:14px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cap-row .sub{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--dim);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cap-row .tag{display:inline-block;font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:1px 5px;border-radius:3px;margin-right:4px;font-weight:700}
+.tag-good{background:rgba(54,211,153,.18);color:var(--green)}
 .tag-anchor{background:rgba(90,169,255,.18);color:var(--blue)}
-.tag-good{background:rgba(54,211,153,.16);color:var(--green)}
-.tag-rough{background:rgba(251,189,35,.16);color:var(--amber)}
-.cap button.del{width:auto;padding:6px 10px;font-size:12px;background:transparent;border-color:#3a2222;color:var(--red)}
-.empty{color:var(--dim);font-size:13px;text-align:center;padding:14px}
-/* toast */
-#toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%) translateY(20px);
-  background:var(--green);color:#04231a;font-weight:700;padding:12px 20px;border-radius:999px;
-  opacity:0;pointer-events:none;transition:.25s;z-index:50;max-width:90%;text-align:center;font-size:14px}
+.tag-rough{background:rgba(251,189,35,.18);color:var(--amber)}
+.tag-pt{background:var(--ring-bg);color:var(--dim)}
+.cap-empty{color:var(--dim);text-align:center;padding:30px 12px;font-size:13px}
+
+/* compass */
+.compass-wrap{padding:14px 0;display:flex;flex-direction:column;align-items:center}
+#compass{width:240px;height:240px;max-width:100%;touch-action:none}
+.compass-ticks line{stroke:var(--dim);stroke-width:1}
+.compass-ticks line.major{stroke:var(--ink);stroke-width:2}
+.compass-lbl{fill:var(--ink);font-size:13px;font-weight:700;font-family:ui-monospace,Menlo,monospace}
+.compass-dim{fill:var(--dim);font-size:9px;font-family:ui-monospace,Menlo,monospace}
+.compass-ring{fill:none;stroke:var(--line);stroke-width:1.5}
+.compass-needle{stroke:var(--accent);stroke-width:3;stroke-linecap:round}
+.compass-needle-back{stroke:var(--dim);stroke-width:2;stroke-linecap:round}
+.compass-hub{fill:var(--accent)}
+.brg-readout{font-family:ui-monospace,Menlo,monospace;font-size:24px;font-weight:700;color:var(--accent);
+  margin-top:6px;letter-spacing:.04em}
+
+/* toasts */
+#toast{position:fixed;left:50%;bottom:max(110px,calc(110px + env(safe-area-inset-bottom)));transform:translateX(-50%) translateY(20px);
+  background:var(--green);color:#04231a;font-weight:700;padding:11px 18px;border-radius:999px;
+  opacity:0;pointer-events:none;transition:.22s;z-index:80;max-width:90%;text-align:center;font-size:13.5px}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #toast.err{background:var(--red);color:#2a0707}
-.foot{font-size:11px;color:var(--dim);text-align:center;margin-top:14px;line-height:1.5}
-.kbd{font-family:var(--mono);color:var(--ink)}
-.vtx-list{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:8px;max-height:120px;overflow:auto}
+#toast.info{background:var(--blue);color:#04141a}
+
+/* help sheet content */
+.help h3{font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--accent);margin:14px 0 6px;font-weight:700}
+.help h3:first-child{margin-top:0}
+.help ol,.help ul{padding-left:22px;margin:6px 0;font-size:13.5px;line-height:1.5}
+.help li{margin:4px 0}
+.help b{color:var(--ink)}
+
+/* sun-mode boost: bigger text in readout */
+[data-theme="sun"] .acc-badge{font-size:14px;padding:5px 12px}
+[data-theme="sun"] #topbar .ll{font-size:12px}
+[data-theme="sun"] #caphint{font-size:13px}
+
+@media (max-height: 620px){
+  #capwrap{width:88px;height:88px}
+  .aux-btn{width:48px;height:48px;font-size:18px}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Field GPS Capture<small>Bradford / Freer — Cut Bank, MT · WGS84</small></h1>
+<div id="app">
 
-  <!-- ============ LIVE FIX PANEL ============ -->
-  <div class="panel">
-    <h2>Live Fix</h2>
-    <div class="readout">
-      <span class="k">Lat</span><span class="v" id="r-lat">—</span>
-      <span class="k">Lon</span><span class="v" id="r-lon">—</span>
-      <span class="k">Accuracy</span><span class="v"><span id="r-acc" class="acc-badge acc-none">no fix</span></span>
-      <span class="k">Fixes seen</span><span class="v" id="r-count">0</span>
-      <span class="k">Phone alt</span><span class="v struck" id="r-alt" title="Ignored — elevation comes from LiDAR/EPQS, never the phone">ignored</span>
+  <header id="topbar">
+    <div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">
+      <span id="r-acc" class="acc-badge acc-none">no fix</span>
+      <div class="ll">
+        <b id="r-lat">—</b>
+        <b id="r-lon">—</b>
+      </div>
     </div>
-    <div class="row" style="margin-top:12px">
-      <button id="btn-gps" class="go">Start GPS</button>
+    <div style="display:flex;gap:6px;position:relative;flex:0 0 auto">
+      <button class="icon-btn" id="btn-sync" aria-label="Sync settings"><span style="font-size:16px">⚡</span><span class="sync-dot s-off" id="sync-dot"></span></button>
+      <button class="icon-btn" id="btn-captures" aria-label="Captures list">≣</button>
+      <button class="icon-btn" id="btn-menu" aria-label="Settings">⚙</button>
     </div>
-    <label class="fld">Accuracy gate (color cue only — actual accuracy is always recorded)</label>
-    <div class="row">
-      <input type="number" id="gate" value="5" min="0.5" step="0.5" inputmode="decimal">
-      <span style="flex:0 0 auto;align-self:center;color:var(--dim);font-size:13px">meters → 🟢≤gate · 🟡≤2×gate · 🔴&gt;2×gate</span>
+  </header>
+
+  <main id="map-area">
+    <canvas id="map"></canvas>
+    <div id="map-hint"></div>
+    <div id="map-controls">
+      <button class="icon-btn" id="btn-fit" aria-label="Fit to data">⤢</button>
+      <button class="icon-btn" id="btn-locate" aria-label="Center on me">⊙</button>
     </div>
+    <div id="scale-bar">—</div>
+  </main>
+
+  <div id="action">
+    <div class="meta-row" id="meta-row">
+      <span class="chip" id="chip-group"><select id="sel-group"></select></span>
+      <button class="chip" id="chip-conf"><span id="conf-label">good</span></button>
+      <button class="chip" id="chip-photo" aria-label="Attach photo">📷 <span id="photo-state">photo</span></button>
+      <button class="chip" id="chip-note" aria-label="Edit note">📝 <span id="note-state">note</span></button>
+    </div>
+    <div class="mode-tabs" id="mode-tabs">
+      <button data-mode="point" aria-selected="true">● Point</button>
+      <button data-mode="perim" aria-selected="false">▱ Area</button>
+      <button data-mode="line"  aria-selected="false">／ Line</button>
+      <button data-mode="tape"  aria-selected="false">↔ Tape</button>
+    </div>
+    <div id="capzone">
+      <button class="aux-btn" id="btn-undo" aria-label="Undo last">↶</button>
+      <div id="capwrap" class="acc-none">
+        <svg viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="44"/>
+          <circle class="ring-fg" id="ring-fg" cx="50" cy="50" r="44"
+                  stroke-dasharray="276.46" stroke-dashoffset="276.46"/>
+        </svg>
+        <button id="btn-capture" disabled>
+          <span class="icon" id="cap-icon">●</span>
+          <span class="lbl" id="cap-lbl">CAPTURE</span>
+        </button>
+      </div>
+      <button class="aux-btn" id="btn-finish" aria-label="Finish shape" disabled>✓</button>
+    </div>
+    <div id="caphint">Tap <b>Start GPS</b> to begin</div>
   </div>
 
-  <!-- ============ GROUP SELECTOR ============ -->
-  <div class="panel">
-    <h2>Group</h2>
-    <select id="group"></select>
-    <div class="grid3" style="margin-top:8px">
-      <button class="ghost" id="g-add">+ Add</button>
-      <button class="ghost" id="g-ren">Rename</button>
-      <button class="ghost" id="g-del">Delete</button>
+  <button id="gps-overlay" style="cursor:pointer">
+    <div>
+      <h1>Field GPS</h1>
+      <p>This app needs location access to capture points. Tap below and grant permission when iOS asks.</p>
+      <button id="btn-start-gps">Start GPS</button>
+      <div style="margin-top:18px"><a id="btn-skip-gps" href="#" style="color:var(--dim);font-size:13px;text-decoration:underline">Skip for now (view captures only)</a></div>
     </div>
-  </div>
+  </button>
 
-  <!-- ============ CAPTURE MODES ============ -->
-  <div class="tabs">
-    <button id="t-point"  aria-selected="true">● Point</button>
-    <button id="t-perim"  aria-selected="false">▱ Perimeter</button>
-    <button id="t-tape"   aria-selected="false">↔ Tape</button>
-  </div>
+</div>
 
-  <!-- POINT MODE -->
-  <div class="mode active panel" id="m-point">
-    <h2>Point — averaged</h2>
-    <div class="grid2">
-      <div><label class="fld">Samples to average</label><input type="number" id="p-n" value="8" min="1" step="1" inputmode="numeric"></div>
-      <div><label class="fld">Confidence</label>
-        <select id="p-conf"><option value="good">good</option><option value="anchor">anchor</option><option value="rough">rough</option></select></div>
-    </div>
-    <label class="fld">Note (optional)</label>
-    <input type="text" id="p-note" placeholder="e.g. NW gravel pit corner">
-    <div style="margin-top:12px"><button class="primary" id="p-go" disabled>Average <span id="p-nlbl">8</span> &amp; Save</button></div>
-    <div class="hint" id="p-status">Start GPS first. Set the phone down on the spot, then average.</div>
-  </div>
+<!-- Sheets -->
+<div id="sheet-bg"></div>
 
-  <!-- PERIMETER / LINE MODE -->
-  <div class="mode panel" id="m-perim">
-    <h2>Perimeter / Line</h2>
-    <div class="grid2">
-      <div><label class="fld">Confidence</label>
-        <select id="pm-conf"><option value="good">good</option><option value="anchor">anchor</option><option value="rough">rough</option></select></div>
-      <div><label class="fld">Vertices dropped</label><input type="text" id="pm-count" value="0" readonly></div>
-    </div>
-    <label class="fld">Note (optional)</label>
-    <input type="text" id="pm-note" placeholder="e.g. gravel pit outline">
-    <div class="row" style="margin-top:12px">
-      <button class="go" id="pm-start">Start shape</button>
-      <button class="primary" id="pm-drop" disabled>Drop vertex</button>
-    </div>
-    <div class="row" style="margin-top:8px">
-      <button id="pm-close" disabled>Close → Polygon</button>
-      <button id="pm-end" disabled>End → Line</button>
-    </div>
-    <button class="ghost stop" id="pm-cancel" disabled style="margin-top:8px">Cancel shape</button>
-    <div class="vtx-list" id="pm-vtx"></div>
-    <div class="hint">Walk the boundary; drop a vertex at each corner/bend. <b>Close</b> seals a polygon (area computed); <b>End</b> leaves it open (length computed).</div>
+<div class="sheet" id="sheet-captures">
+  <div class="sheet-grab"></div>
+  <div class="sheet-head">
+    <h2>Captures (<span id="cap-total">0</span>)</h2>
+    <button class="icon-btn close-sheet" data-target="captures">×</button>
   </div>
+  <div class="sheet-body" id="cap-list"><div class="cap-empty">Nothing captured yet. Switch to Point mode and tap the big yellow button.</div></div>
+</div>
 
-  <!-- TAPE / OFFSET MODE -->
-  <div class="mode panel" id="m-tape">
-    <h2>Tape / Offset</h2>
-    <label class="fld">Anchor (a saved point)</label>
-    <select id="tp-anchor"></select>
-    <div class="grid3" style="margin-top:6px">
-      <div><label class="fld">Distance</label><input type="number" id="tp-dist" inputmode="decimal" step="0.01" placeholder="0.00"></div>
-      <div><label class="fld">Units</label><select id="tp-unit"><option value="m">m</option><option value="ft">ft</option></select></div>
-      <div><label class="fld">True bearing °</label><input type="number" id="tp-brg" inputmode="decimal" step="0.1" min="0" max="360" placeholder="0–360"></div>
-    </div>
+<div class="sheet" id="sheet-edit">
+  <div class="sheet-grab"></div>
+  <div class="sheet-head">
+    <h2 id="edit-title">Edit capture</h2>
+    <button class="icon-btn close-sheet" data-target="edit">×</button>
+  </div>
+  <div class="sheet-body">
+    <label class="fld">Label</label>
+    <input class="inp" id="ed-label">
+    <label class="fld">Group</label>
+    <select class="inp" id="ed-group"></select>
     <label class="fld">Confidence</label>
-    <select id="tp-conf"><option value="good">good</option><option value="anchor">anchor</option><option value="rough">rough</option></select>
+    <select class="inp" id="ed-conf"><option value="good">good</option><option value="anchor">anchor</option><option value="rough">rough</option></select>
+    <label class="fld">Note</label>
+    <input class="inp" id="ed-note">
+    <label class="fld">Photo</label>
+    <div id="ed-photo-area" style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+      <div id="ed-thumb" class="thumb" style="width:60px;height:60px;border-radius:8px;background:var(--ring-bg);display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:24px;background-size:cover;background-position:center">—</div>
+      <button class="btn" id="ed-photo-pick" style="flex:1">Pick / Replace</button>
+      <button class="btn stop" id="ed-photo-clear" style="flex:0 0 auto;width:auto;padding:13px 14px">✕</button>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn primary" id="ed-save">Save changes</button>
+    </div>
+    <button class="btn stop" id="ed-delete" style="margin-top:8px">Delete capture</button>
+  </div>
+</div>
+
+<div class="sheet" id="sheet-tape">
+  <div class="sheet-grab"></div>
+  <div class="sheet-head">
+    <h2>Tape / Offset</h2>
+    <button class="icon-btn close-sheet" data-target="tape">×</button>
+  </div>
+  <div class="sheet-body">
+    <label class="fld">Anchor (a saved point)</label>
+    <select class="inp" id="tp-anchor"></select>
+    <div class="grid2" style="margin-top:8px">
+      <div>
+        <label class="fld">Distance</label>
+        <div class="row">
+          <input class="inp" type="number" id="tp-dist" inputmode="decimal" step="0.01" placeholder="0.00">
+          <select class="inp" id="tp-unit" style="flex:0 0 70px"><option value="m">m</option><option value="ft">ft</option></select>
+        </div>
+      </div>
+      <div>
+        <label class="fld">Bearing</label>
+        <input class="inp" type="number" id="tp-brg" inputmode="decimal" step="1" min="0" max="360" placeholder="0–360°">
+      </div>
+    </div>
+    <div class="compass-wrap">
+      <svg id="compass" viewBox="0 0 240 240" aria-label="Bearing compass">
+        <circle class="compass-ring" cx="120" cy="120" r="108"/>
+        <g class="compass-ticks" id="compass-ticks"></g>
+        <g id="compass-labels"></g>
+        <line class="compass-needle-back" id="needle-back" x1="120" y1="120" x2="120" y2="200"/>
+        <line class="compass-needle" id="needle-fwd" x1="120" y1="120" x2="120" y2="32"/>
+        <circle class="compass-hub" cx="120" cy="120" r="6"/>
+      </svg>
+      <div class="brg-readout"><span id="brg-readout">0°</span> true</div>
+      <button class="btn" id="btn-orient" style="margin-top:8px">Use phone orientation</button>
+    </div>
     <label class="fld">Note (optional)</label>
-    <input type="text" id="tp-note" placeholder="e.g. house SW corner → propane tank">
-    <div style="margin-top:12px"><button class="primary" id="tp-go">Compute &amp; Save</button></div>
-    <div class="math" id="tp-math" style="display:none"></div>
+    <input class="inp" id="tp-note" placeholder="e.g. NE corner offset from house">
+    <div style="margin-top:14px"><button class="btn primary" id="tp-go" disabled>Compute &amp; save</button></div>
     <div class="hint">Computes the second point by equirectangular offset from the anchor — no GPS error added. True bearing (N=0°, CW).</div>
   </div>
+</div>
 
-  <!-- ============ CAPTURES ============ -->
-  <div class="panel">
-    <h2>Captures (<span id="cap-total">0</span>)</h2>
-    <div id="cap-list"><div class="empty">Nothing captured yet.</div></div>
+<div class="sheet" id="sheet-menu">
+  <div class="sheet-grab"></div>
+  <div class="sheet-head">
+    <h2>Settings</h2>
+    <button class="icon-btn close-sheet" data-target="menu">×</button>
   </div>
-
-  <!-- ============ EXPORT ============ -->
-  <div class="panel">
-    <h2>Export</h2>
-    <div class="grid3">
-      <button id="x-kml">KML</button>
-      <button id="x-geo">GeoJSON</button>
-      <button id="x-csv">CSV</button>
+  <div class="sheet-body">
+    <label class="fld">Theme</label>
+    <div class="row">
+      <button class="btn" data-theme-set="dark" id="theme-dark">Dark</button>
+      <button class="btn" data-theme-set="sun"  id="theme-sun">Sunlight</button>
     </div>
-    <button class="ghost stop" id="x-clear" style="margin-top:8px">Clear all captures…</button>
-  </div>
+    <label class="fld">Accuracy gate (color cue only)</label>
+    <div class="row">
+      <input class="inp" type="number" id="gate" value="5" min="0.5" step="0.5" inputmode="decimal">
+      <span class="hint" style="flex:0 0 auto;align-self:center;margin:0">meters · 🟢≤gate · 🟡≤2× · 🔴&gt;2×</span>
+    </div>
+    <label class="fld">Samples to average (Point mode)</label>
+    <input class="inp" type="number" id="psamples" value="8" min="1" step="1" inputmode="numeric">
 
-  <div class="foot">
-    Local equirectangular projection anchored at SW corner ·
-    <span class="kbd">m/°lat = 111320</span> · <span class="kbd">m/°lon = 73581.8</span><br>
-    Elevation is never taken from the phone — attached later from USGS&nbsp;3DEP&nbsp;(EPQS).<br>
-    Data stored in this browser only. Export regularly. Add to Home Screen for offline use.
+    <label class="fld" style="margin-top:18px">Export (manual download)</label>
+    <div class="row">
+      <button class="btn" id="x-kml">KML</button>
+      <button class="btn" id="x-geo">GeoJSON</button>
+      <button class="btn" id="x-csv">CSV</button>
+    </div>
+
+    <label class="fld" style="margin-top:18px">Help</label>
+    <button class="btn" id="btn-help">Open directions</button>
+
+    <label class="fld" style="margin-top:18px">Danger zone</label>
+    <button class="btn stop" id="x-clear">Delete all captures…</button>
+  </div>
+</div>
+
+<div class="sheet" id="sheet-sync">
+  <div class="sheet-grab"></div>
+  <div class="sheet-head">
+    <h2>GitHub Sync</h2>
+    <button class="icon-btn close-sheet" data-target="sync">×</button>
+  </div>
+  <div class="sheet-body">
+    <div class="hint" style="margin-top:0">Each capture uploads the current GeoJSON snapshot (including photos) to a private GitHub repo. Token is stored only in this browser and sent only to api.github.com.</div>
+    <label class="fld">GitHub username or org</label>
+    <input class="inp" type="text" id="gh-owner" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. xvrctgp85r-ship-it">
+    <label class="fld">Repository</label>
+    <input class="inp" type="text" id="gh-repo" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. fieldgps">
+    <div class="grid2" style="margin-top:6px">
+      <div><label class="fld">Branch</label><input class="inp" type="text" id="gh-branch" value="main" autocomplete="off" spellcheck="false"></div>
+      <div><label class="fld">Path in repo</label><input class="inp" type="text" id="gh-path" value="data/captures.geojson" autocomplete="off" spellcheck="false"></div>
+    </div>
+    <label class="fld">Fine-grained Personal Access Token</label>
+    <input class="inp" type="password" id="gh-token" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…">
+    <div class="hint">Create at <span class="kbd">github.com/settings/personal-access-tokens</span>. Scope: <b>this repo only</b>, <b>Contents: Read &amp; Write</b>.</div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn primary" id="gh-save">Save</button>
+      <button class="btn" id="gh-test">Test connection</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn go" id="gh-sync-now">Sync now</button>
+      <button class="btn stop" id="gh-clear">Clear settings</button>
+    </div>
+    <div class="hint" id="gh-status" style="margin-top:10px">Not configured.</div>
+  </div>
+</div>
+
+<div class="sheet" id="sheet-help">
+  <div class="sheet-grab"></div>
+  <div class="sheet-head">
+    <h2>How to use this page</h2>
+    <button class="icon-btn close-sheet" data-target="help">×</button>
+  </div>
+  <div class="sheet-body help">
+    <h3>One-time setup</h3>
+    <ol>
+      <li>Open this page in iPhone <b>Safari</b>, tap <b>Share → Add to Home Screen</b>. Launch from the Home Screen icon to run offline.</li>
+      <li>Open <b>Settings (⚙) → GitHub Sync</b> (or tap the ⚡ icon). Fill in owner, repo, branch, path, and a fine-grained PAT. Tap <b>Test connection</b> → <b>Save</b>.</li>
+    </ol>
+    <h3>Capturing</h3>
+    <ol>
+      <li>Tap the big <b>Start GPS</b> button on first launch. Grant permission. The accuracy badge in the top bar turns green when you're within the gate (default 5 m).</li>
+      <li>Pick a <b>Group</b> chip and a <b>Confidence</b>. Tap the 📷 chip if you want a photo attached to the next capture.</li>
+      <li>Pick a mode: <b>● Point</b> averages 8 fixes for one precise spot. <b>▱ Area</b> / <b>／ Line</b> drop one vertex per tap of the big button — tap <b>✓</b> when done. <b>↔ Tape</b> opens the compass for offset-from-anchor.</li>
+      <li>Use <b>↶</b> to undo the last vertex (or the last point if no shape is in progress).</li>
+    </ol>
+    <h3>The map</h3>
+    <ul>
+      <li>Drag with one finger to pan, pinch to zoom.</li>
+      <li>⤢ fits all captures + your current position. ⊙ centers on your live fix.</li>
+      <li>Points are colored by confidence. The blue pulsing dot is your live GPS position; the dim circle around it is the reported horizontal accuracy.</li>
+    </ul>
+    <h3>Sync</h3>
+    <ul>
+      <li>The ⚡ icon in the top bar shows sync state. Tap it to open settings or force a sync.</li>
+      <li>If offline, captures stay queued and upload when the phone reconnects.</li>
+      <li>Photos are stored as thumbnails inside the GeoJSON (base64 data URLs). For very many photos, consider exporting and clearing periodically.</li>
+    </ul>
+    <h3>Gotchas</h3>
+    <ul>
+      <li><b>Phone elevation is ignored on purpose.</b> Elevation is attached later from USGS 3DEP/EPQS data per point.</li>
+      <li><b>Shape vertices aren't averaged.</b> For corners that must be both precise and part of a polygon, capture as Points and reconstruct downstream.</li>
+      <li><b>Tape offsets inherit the anchor's accuracy.</b> Don't tape from a "rough" anchor and call the result precise.</li>
+    </ul>
   </div>
 </div>
 
 <div id="toast"></div>
 
+<input type="file" id="photo-input" accept="image/*" capture="environment" style="display:none">
+
 <script>
 "use strict";
 /* ============================================================
-   PRESET GROUPS  — edit freely. `kind` just preselects a capture
-   mode (point | line | area | any). Add/rename/delete also works in-app.
+   FIELD GPS v3 — Bradford/Freer property capture tool
+   - Map-centric layout (canvas, no external tiles)
+   - Dominant capture button with averaging ring
+   - Per-capture photos (thumbnails, base64)
+   - Visual compass for Tape, optional device orientation
+   - Undo, edit captures, sunlight theme, real app icon
+   - GitHub Contents API auto-sync (compatible with v2 settings)
    ============================================================ */
+
+/* ---------- presets ---------- */
 const PRESET_GROUPS = [
-  {name:"Gravel pit edges",            kind:"area"},   // <-- first job
+  {name:"Gravel pit edges",            kind:"area"},
   {name:"House corners",               kind:"point"},
-  {name:"Cistern",                     kind:"point"},  // 3,700 gal, ~0.61 m below grade — verify
-  {name:"Outdoor faucet",              kind:"point"},  // irrigation tie-in
-  {name:"Buried water line route",     kind:"line"},   // cistern → pump → house → faucet
-  {name:"Well",                        kind:"point"},  // if separate from cistern
+  {name:"Cistern",                     kind:"point"},
+  {name:"Outdoor faucet",              kind:"point"},
+  {name:"Buried water line route",     kind:"line"},
+  {name:"Well",                        kind:"point"},
   {name:"Propane tank",                kind:"point"},
   {name:"Utility pole / service drop", kind:"point"},
   {name:"RV power + 120V (house wall)",kind:"point"},
@@ -234,143 +509,568 @@ const PRESET_GROUPS = [
   {name:"Fence line (barbwire)",       kind:"line"},
   {name:"Driveway / easement",         kind:"line"},
   {name:"Creek centerline",            kind:"line"},
-  {name:"Gates",                       kind:"point"},  // cattle gate + others
+  {name:"Gates",                       kind:"point"},
   {name:"Flat Spot",                   kind:"area"},
-  {name:"Seedlings",                   kind:"point"},  // sumac/chokecherry/scotch/ponderosa/ash/redcedar
+  {name:"Seedlings",                   kind:"point"},
   {name:"Snowdrift zones",             kind:"area"},
   {name:"East boundary / 2nd parcel",  kind:"line"},
 ];
 
-/* ---- Projection constants (PROJECT_CONTEXT.md, SW-anchored equirectangular) ---- */
+/* ---------- projection constants (PROJECT_CONTEXT) ---------- */
 const M_PER_DEG_LAT = 111320;
 const M_PER_DEG_LON = 73581.8;
 const FT_TO_M = 0.3048;
+const DEFAULT_CENTER = {lat: 48.626, lon: -112.371};
 
-/* ---------------- storage ---------------- */
-const LS_CAPS = "bf_caps_v2", LS_GROUPS = "bf_groups_v2";
-const load = (k,d)=>{ try{ const v=JSON.parse(localStorage.getItem(k)); return v??d; }catch(e){ return d; } };
-const save = (k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){ toast("Storage failed — export now!",true); } };
+/* ---------- storage ---------- */
+const LS_CAPS="bf_caps_v2", LS_GROUPS="bf_groups_v2", LS_GH="bf_gh_v1",
+      LS_SYNC="bf_sync_v1", LS_THEME="bf_theme_v1", LS_PREFS="bf_prefs_v1";
+
+const load=(k,d)=>{ try{ const v=JSON.parse(localStorage.getItem(k)); return v??d; }catch(e){ return d; } };
+const save=(k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){ toast("Storage full — export & clear",true); } };
 
 let groups = load(LS_GROUPS, PRESET_GROUPS.map(g=>g.name));
-let caps   = load(LS_CAPS, []);          // each: {id,group,label,type,lat,lon,acc,samples,confidence,note,ts,vertices?}
-const groupKind = {}; PRESET_GROUPS.forEach(g=>groupKind[g.name]=g.kind);
+let caps   = load(LS_CAPS, []);
+let gh     = load(LS_GH, {owner:"", repo:"", branch:"main", path:"data/captures.geojson", token:""});
+let syncState = (()=>{ const p=load(LS_SYNC,{}); return {status:"off", lastSyncTs:p.lastSyncTs||null, lastError:null, pending:false}; })();
+let prefs = load(LS_PREFS, {gate:5, psamples:8, currentGroup:groups[0]||"", currentConf:"good"});
 
-/* ---------------- DOM helpers ---------------- */
+/* ---------- DOM helpers ---------- */
 const $ = id => document.getElementById(id);
-function toast(msg, err){
-  const t=$("toast"); t.textContent=msg; t.className="show"+(err?" err":"");
-  if(navigator.vibrate) navigator.vibrate(err?[40,40,40]:30);
-  clearTimeout(toast._t); toast._t=setTimeout(()=>t.className="",1800);
+const qs = s => document.querySelector(s);
+const qsa = s => document.querySelectorAll(s);
+let toastTimer=null;
+function toast(msg, kind){
+  const t=$("toast"); if(!t) return;
+  t.textContent = msg;
+  t.className = "show" + (kind==="err"?" err":kind==="info"?" info":"");
+  if(navigator.vibrate) navigator.vibrate(kind==="err"?[40,40,40]:25);
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>{ t.className=""; }, 1900);
 }
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
 function nextLabel(group){
   const n = caps.filter(c=>c.group===group).length + 1;
   return group.replace(/[^A-Za-z0-9]+/g,"_").replace(/^_|_$/g,"").slice(0,18)+"-"+String(n).padStart(2,"0");
 }
+function fmtSync(ts){
+  if(!ts) return "";
+  const d=new Date(ts), now=new Date();
+  return d.toDateString()===now.toDateString()
+    ? d.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})
+    : d.toLocaleString([],{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"});
+}
+function escHTML(s){ return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-/* ---------------- live GPS ---------------- */
-let watchId=null, lastFix=null, fixCount=0, wakeLock=null, gateVal=5;
+/* ---------- THEME ---------- */
+function setTheme(name){
+  document.documentElement.setAttribute("data-theme", name);
+  save(LS_THEME, name);
+  document.querySelector('meta[name="theme-color"]').setAttribute("content", name==="sun"?"#ffffff":"#0c0d0e");
+  $("theme-dark").style.background = (name==="dark") ? "var(--accent)" : "var(--panel2)";
+  $("theme-dark").style.color      = (name==="dark") ? "#1a1400" : "var(--ink)";
+  $("theme-sun").style.background  = (name==="sun")  ? "var(--accent)" : "var(--panel2)";
+  $("theme-sun").style.color       = (name==="sun")  ? "#1a1400" : "var(--ink)";
+  if(window.mapDraw) mapDraw();
+}
+setTheme(load(LS_THEME, "dark"));
+
+/* ============================================================
+   GPS
+   ============================================================ */
+let watchId=null, lastFix=null, fixCount=0, wakeLock=null, gateVal=prefs.gate||5;
+
 async function startGPS(){
-  if(!navigator.geolocation){ toast("No geolocation on this device",true); return; }
-  if(watchId!==null){ stopGPS(); return; }
-  watchId = navigator.geolocation.watchPosition(onFix, onErr, {enableHighAccuracy:true, maximumAge:0, timeout:15000});
-  $("btn-gps").textContent="Stop GPS"; $("btn-gps").className="stop";
-  $("p-go").disabled=false;
-  try{ if("wakeLock" in navigator){ wakeLock=await navigator.wakeLock.request("screen"); } }catch(e){}
+  if(!navigator.geolocation){ toast("No geolocation on this device","err"); return false; }
+  if(watchId!==null){ stopGPS(); return false; }
+  return new Promise(resolve=>{
+    let first=true;
+    watchId = navigator.geolocation.watchPosition(
+      pos=>{ onFix(pos); if(first){ first=false; resolve(true); } },
+      e=>{ toast("GPS: "+e.message,"err"); if(first){ first=false; stopGPS(); resolve(false); } },
+      {enableHighAccuracy:true, maximumAge:0, timeout:15000}
+    );
+    try{ if("wakeLock" in navigator) navigator.wakeLock.request("screen").then(w=>wakeLock=w).catch(()=>{}); }catch(e){}
+    setTimeout(()=>{ if(first){ first=false; resolve(false); } }, 18000);
+  });
 }
 function stopGPS(){
   if(watchId!==null){ navigator.geolocation.clearWatch(watchId); watchId=null; }
-  $("btn-gps").textContent="Start GPS"; $("btn-gps").className="go";
-  $("p-go").disabled=true;
   if(wakeLock){ try{wakeLock.release();}catch(e){} wakeLock=null; }
   lastFix=null;
+  refreshUI();
 }
 document.addEventListener("visibilitychange", async ()=>{
-  if(wakeLock!==null && document.visibilityState==="visible" && watchId!==null){
-    try{ wakeLock=await navigator.wakeLock.request("screen"); }catch(e){}
+  if(document.visibilityState==="visible" && watchId!==null && wakeLock===null){
+    try{ if("wakeLock" in navigator){ wakeLock=await navigator.wakeLock.request("screen"); } }catch(e){}
   }
 });
-function onErr(e){ toast("GPS: "+e.message, true); }
 function onFix(pos){
   const c=pos.coords;
-  lastFix={lat:c.latitude, lon:c.longitude, acc:c.accuracy};
+  lastFix={lat:c.latitude, lon:c.longitude, acc:c.accuracy, ts:pos.timestamp};
   fixCount++;
-  $("r-lat").textContent=c.latitude.toFixed(6);
-  $("r-lon").textContent=c.longitude.toFixed(6);
-  $("r-count").textContent=fixCount;
-  const a=$("r-acc"); a.textContent=(c.accuracy!=null? c.accuracy.toFixed(1)+" m":"—");
-  gateVal=parseFloat($("gate").value)||5;
-  a.className="acc-badge "+(c.accuracy<=gateVal?"acc-green":c.accuracy<=2*gateVal?"acc-amber":"acc-red");
-  if(averaging) collectSample();      // feed point-averaging if active
+  refreshFixUI();
+  if(captureState.averaging) collectSample();
+  if(mapState.followMe) centerOnFix();
+  else if(mapState.firstFix){ mapState.firstFix=false; centerOnFix(); }
+  mapDraw();
+}
+function refreshFixUI(){
+  const a = $("r-acc");
+  if(!lastFix){
+    $("r-lat").textContent="—"; $("r-lon").textContent="—";
+    a.textContent="no fix"; a.className="acc-badge acc-none";
+    $("capwrap").className="acc-none";
+    return;
+  }
+  $("r-lat").textContent=lastFix.lat.toFixed(6);
+  $("r-lon").textContent=lastFix.lon.toFixed(6);
+  a.textContent=(lastFix.acc!=null? lastFix.acc.toFixed(1)+" m" : "—");
+  const cls = lastFix.acc<=gateVal ? "acc-green" : lastFix.acc<=2*gateVal ? "acc-amber" : "acc-red";
+  a.className="acc-badge "+cls;
+  $("capwrap").className=cls;
 }
 
-/* ---------------- POINT mode (averaging) ---------------- */
-let averaging=false, sampleBuf=[], needSamples=8;
+/* ============================================================
+   MAP — canvas renderer, equirectangular, pan + pinch
+   ============================================================ */
+const cv = $("map"), ctx = cv.getContext("2d");
+let DPR = Math.max(1, window.devicePixelRatio||1);
+let mapState = {
+  centerLat: DEFAULT_CENTER.lat, centerLon: DEFAULT_CENTER.lon,
+  mpp: 1.0,          // meters per CSS pixel
+  W: 0, H: 0,
+  firstFix: true,
+  followMe: false,
+  panActive: false, panStart: null,
+  pinchActive: false, pinchStartDist: 0, pinchStartMpp: 1.0,
+};
+
+function resizeCanvas(){
+  DPR = Math.max(1, window.devicePixelRatio||1);
+  const r = cv.getBoundingClientRect();
+  mapState.W = r.width; mapState.H = r.height;
+  cv.width = Math.round(r.width * DPR);
+  cv.height = Math.round(r.height * DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  mapDraw();
+}
+window.addEventListener("resize", resizeCanvas);
+window.addEventListener("orientationchange", ()=>setTimeout(resizeCanvas,200));
+
+function llToXY(lat, lon){
+  // local equirectangular, meters per pixel = mpp
+  const dE = (lon - mapState.centerLon) * M_PER_DEG_LON;
+  const dN = (lat - mapState.centerLat) * M_PER_DEG_LAT;
+  return { x: mapState.W/2 + dE/mapState.mpp, y: mapState.H/2 - dN/mapState.mpp };
+}
+function xyToLL(x, y){
+  const dE = (x - mapState.W/2) * mapState.mpp;
+  const dN = (mapState.H/2 - y) * mapState.mpp;
+  return { lat: mapState.centerLat + dN/M_PER_DEG_LAT, lon: mapState.centerLon + dE/M_PER_DEG_LON };
+}
+function centerOnFix(){
+  if(!lastFix) return;
+  mapState.centerLat = lastFix.lat; mapState.centerLon = lastFix.lon;
+  mapDraw();
+}
+function fitToData(){
+  const pts=[];
+  caps.forEach(c=>{
+    if(c.type==="point") pts.push([c.lat,c.lon]);
+    else if(c.vertices) c.vertices.forEach(v=>pts.push([v.lat,v.lon]));
+  });
+  if(captureState.shape) captureState.shape.vertices.forEach(v=>pts.push([v.lat,v.lon]));
+  if(lastFix) pts.push([lastFix.lat,lastFix.lon]);
+  if(!pts.length){ mapState.centerLat=DEFAULT_CENTER.lat; mapState.centerLon=DEFAULT_CENTER.lon; mapState.mpp=1.5; mapDraw(); return; }
+  let minLat=pts[0][0],maxLat=pts[0][0],minLon=pts[0][1],maxLon=pts[0][1];
+  pts.forEach(p=>{ if(p[0]<minLat)minLat=p[0]; if(p[0]>maxLat)maxLat=p[0]; if(p[1]<minLon)minLon=p[1]; if(p[1]>maxLon)maxLon=p[1]; });
+  const padM=20;
+  const dN = Math.max(1,(maxLat-minLat)*M_PER_DEG_LAT) + padM*2;
+  const dE = Math.max(1,(maxLon-minLon)*M_PER_DEG_LON) + padM*2;
+  const mppN = dN/Math.max(50,mapState.H), mppE = dE/Math.max(50,mapState.W);
+  mapState.mpp = Math.max(0.05, Math.max(mppN, mppE));
+  mapState.centerLat = (minLat+maxLat)/2;
+  mapState.centerLon = (minLon+maxLon)/2;
+  mapDraw();
+}
+
+function css(varname){ return getComputedStyle(document.documentElement).getPropertyValue(varname).trim(); }
+
+function drawGrid(){
+  // grid lines at meter intervals chosen by mpp
+  const mpp = mapState.mpp;
+  let step = 1;
+  if(mpp>50) step=500; else if(mpp>20) step=200; else if(mpp>10) step=100; else if(mpp>4) step=50; else if(mpp>2) step=20; else if(mpp>0.8) step=10; else if(mpp>0.3) step=5; else step=2;
+  // top-left in meters from center
+  const W=mapState.W, H=mapState.H;
+  const xMinM = -W/2*mpp, xMaxM = W/2*mpp;
+  const yMinM = -H/2*mpp, yMaxM = H/2*mpp;
+  ctx.strokeStyle = css("--map-grid");
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  const startX = Math.ceil(xMinM/step)*step;
+  for(let m=startX; m<=xMaxM; m+=step){
+    const x = W/2 + m/mpp;
+    ctx.moveTo(x, 0); ctx.lineTo(x, H);
+  }
+  const startY = Math.ceil(yMinM/step)*step;
+  for(let m=startY; m<=yMaxM; m+=step){
+    const y = H/2 - m/mpp;
+    ctx.moveTo(0, y); ctx.lineTo(W, y);
+  }
+  ctx.stroke();
+  // scale bar
+  const targetPx=80;
+  let bestStep=1, bestDiff=Infinity;
+  [1,2,5,10,20,50,100,200,500,1000].forEach(s=>{
+    const px=s/mpp; const d=Math.abs(px-targetPx);
+    if(d<bestDiff){ bestDiff=d; bestStep=s; }
+  });
+  $("scale-bar").textContent = bestStep+" m  "+"━".repeat(Math.max(1, Math.min(8, Math.round(bestStep/mpp/10))));
+  // Actually just show a numeric scale; the line widget is the css scale-bar element
+  $("scale-bar").textContent = bestStep + " m";
+  $("scale-bar").style.width = (bestStep/mpp)+"px";
+  $("scale-bar").style.borderBottom = "2px solid "+css("--ink");
+  $("scale-bar").style.paddingBottom = "2px";
+}
+
+function confColor(conf){
+  if(conf==="good") return css("--green");
+  if(conf==="anchor") return css("--blue");
+  if(conf==="rough") return css("--amber");
+  return css("--dim");
+}
+
+function drawCaptures(){
+  // polygons + lines first (so points sit on top)
+  caps.forEach(c=>{
+    if(c.type==="polygon"){
+      const col = confColor(c.confidence);
+      ctx.fillStyle = col + "22";
+      ctx.strokeStyle = col;
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      c.vertices.forEach((v,i)=>{
+        const p = llToXY(v.lat, v.lon);
+        if(i===0) ctx.moveTo(p.x,p.y); else ctx.lineTo(p.x,p.y);
+      });
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+    } else if(c.type==="line"){
+      const col = confColor(c.confidence);
+      ctx.strokeStyle = col; ctx.lineWidth = 2.5; ctx.lineCap="round"; ctx.lineJoin="round";
+      ctx.beginPath();
+      c.vertices.forEach((v,i)=>{
+        const p = llToXY(v.lat, v.lon);
+        if(i===0) ctx.moveTo(p.x,p.y); else ctx.lineTo(p.x,p.y);
+      });
+      ctx.stroke();
+    }
+  });
+  // in-progress shape
+  if(captureState.shape && captureState.shape.vertices.length){
+    ctx.strokeStyle = css("--red"); ctx.lineWidth=2; ctx.setLineDash([4,3]);
+    ctx.beginPath();
+    captureState.shape.vertices.forEach((v,i)=>{
+      const p=llToXY(v.lat,v.lon);
+      if(i===0) ctx.moveTo(p.x,p.y); else ctx.lineTo(p.x,p.y);
+    });
+    if(lastFix){ const p=llToXY(lastFix.lat,lastFix.lon); ctx.lineTo(p.x,p.y); }
+    ctx.stroke(); ctx.setLineDash([]);
+    // vertex dots
+    captureState.shape.vertices.forEach((v,i)=>{
+      const p=llToXY(v.lat,v.lon);
+      ctx.fillStyle=css("--red"); ctx.beginPath(); ctx.arc(p.x,p.y,3.5,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle=css("--ink"); ctx.font="bold 9px ui-monospace,Menlo,monospace"; ctx.textAlign="center";
+      ctx.fillText(String(i+1), p.x, p.y-7);
+    });
+  }
+  // points
+  caps.forEach(c=>{
+    if(c.type!=="point") return;
+    const p = llToXY(c.lat, c.lon);
+    if(p.x<-20||p.x>mapState.W+20||p.y<-20||p.y>mapState.H+20) return;
+    const col = confColor(c.confidence);
+    // accuracy halo
+    if(c.acc){
+      const r = c.acc/mapState.mpp;
+      ctx.fillStyle = col + "1a";
+      ctx.beginPath(); ctx.arc(p.x,p.y,Math.min(80,Math.max(2,r)),0,Math.PI*2); ctx.fill();
+    }
+    ctx.fillStyle = col; ctx.strokeStyle = css("--bg"); ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(p.x,p.y,5,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    if(c.photo){
+      ctx.fillStyle=css("--ink"); ctx.font="9px sans-serif"; ctx.textAlign="left";
+      ctx.fillText("📷", p.x+7, p.y-5);
+    }
+  });
+}
+
+let pulsePhase = 0;
+function drawMe(){
+  if(!lastFix) return;
+  const p = llToXY(lastFix.lat, lastFix.lon);
+  const accR = lastFix.acc ? lastFix.acc/mapState.mpp : 0;
+  if(accR>2){
+    ctx.fillStyle = css("--blue") + "26";
+    ctx.strokeStyle = css("--blue") + "66";
+    ctx.lineWidth=1;
+    ctx.beginPath(); ctx.arc(p.x,p.y,Math.min(120,accR),0,Math.PI*2); ctx.fill(); ctx.stroke();
+  }
+  const r = 6 + Math.sin(pulsePhase)*1.2;
+  ctx.fillStyle = css("--blue");
+  ctx.strokeStyle = css("--bg");
+  ctx.lineWidth=2.5;
+  ctx.beginPath(); ctx.arc(p.x,p.y,r,0,Math.PI*2); ctx.fill(); ctx.stroke();
+}
+
+function mapDraw(){
+  const W=mapState.W, H=mapState.H;
+  if(!W||!H) return;
+  ctx.fillStyle = css("--map-bg"); ctx.fillRect(0,0,W,H);
+  drawGrid();
+  drawCaptures();
+  drawMe();
+}
+function pulseLoop(){ pulsePhase = (pulsePhase + 0.12) % (Math.PI*2); if(lastFix) mapDraw(); requestAnimationFrame(pulseLoop); }
+requestAnimationFrame(pulseLoop);
+
+/* ---------- touch: pan + pinch ---------- */
+function getTouchDist(t1,t2){ const dx=t1.clientX-t2.clientX, dy=t1.clientY-t2.clientY; return Math.hypot(dx,dy); }
+cv.addEventListener("touchstart", e=>{
+  if(e.touches.length===1){
+    mapState.panActive=true; mapState.followMe=false;
+    const r=cv.getBoundingClientRect();
+    mapState.panStart = {x:e.touches[0].clientX-r.left, y:e.touches[0].clientY-r.top, lat:mapState.centerLat, lon:mapState.centerLon};
+  } else if(e.touches.length===2){
+    mapState.panActive=false;
+    mapState.pinchActive=true;
+    mapState.pinchStartDist=getTouchDist(e.touches[0],e.touches[1]);
+    mapState.pinchStartMpp=mapState.mpp;
+  }
+}, {passive:true});
+cv.addEventListener("touchmove", e=>{
+  e.preventDefault();
+  if(mapState.pinchActive && e.touches.length===2){
+    const d = getTouchDist(e.touches[0], e.touches[1]);
+    const ratio = mapState.pinchStartDist / Math.max(1,d);
+    mapState.mpp = Math.max(0.05, Math.min(500, mapState.pinchStartMpp * ratio));
+    mapDraw();
+  } else if(mapState.panActive && e.touches.length===1){
+    const r=cv.getBoundingClientRect();
+    const nx=e.touches[0].clientX-r.left, ny=e.touches[0].clientY-r.top;
+    const dxPx = nx - mapState.panStart.x;
+    const dyPx = ny - mapState.panStart.y;
+    mapState.centerLon = mapState.panStart.lon - (dxPx*mapState.mpp)/M_PER_DEG_LON;
+    mapState.centerLat = mapState.panStart.lat + (dyPx*mapState.mpp)/M_PER_DEG_LAT;
+    mapDraw();
+  }
+}, {passive:false});
+cv.addEventListener("touchend", e=>{
+  if(e.touches.length===0){ mapState.panActive=false; mapState.pinchActive=false; }
+  if(e.touches.length===1){ mapState.pinchActive=false; mapState.panActive=true;
+    const r=cv.getBoundingClientRect();
+    mapState.panStart={x:e.touches[0].clientX-r.left,y:e.touches[0].clientY-r.top,lat:mapState.centerLat,lon:mapState.centerLon};
+  }
+}, {passive:true});
+// wheel zoom for desktop testing
+cv.addEventListener("wheel", e=>{
+  e.preventDefault();
+  const f = e.deltaY>0 ? 1.15 : 1/1.15;
+  mapState.mpp = Math.max(0.05, Math.min(500, mapState.mpp*f));
+  mapDraw();
+}, {passive:false});
+
+/* ============================================================
+   CAPTURE FLOW
+   ============================================================ */
+let captureState = {
+  mode: "point",         // point | perim | line | tape
+  averaging: false,
+  samples: [],
+  needSamples: prefs.psamples || 8,
+  shape: null,           // {vertices:[]}
+  pendingPhoto: null,    // dataURL (thumbnail) to attach to NEXT capture
+  pendingNote: ""
+};
+
+const RING_CIRC = 2 * Math.PI * 44; // r=44
+
+function setRingProgress(p){  // 0..1
+  const off = RING_CIRC * (1 - Math.max(0, Math.min(1, p)));
+  $("ring-fg").setAttribute("stroke-dashoffset", off.toFixed(2));
+}
+
+function refreshCapButton(){
+  const btn = $("btn-capture"), icon = $("cap-icon"), lbl = $("cap-lbl");
+  const m = captureState.mode;
+  if(!lastFix && m!=="tape"){
+    btn.disabled = false; icon.textContent="⊙"; lbl.textContent="START GPS"; btn.classList.remove("busy");
+    $("caphint").innerHTML = 'GPS is off — tap to enable';
+    $("btn-finish").disabled = true; $("btn-undo").disabled = caps.length===0;
+    return;
+  }
+  if(m==="point"){
+    btn.disabled = false; icon.textContent="●"; lbl.textContent= captureState.averaging ? "…" : "POINT";
+    btn.classList.toggle("busy", captureState.averaging);
+    $("caphint").innerHTML = captureState.averaging
+      ? `Hold still… <b>${captureState.samples.length}/${captureState.needSamples}</b>`
+      : `Set the phone down, then tap. Averages <b>${captureState.needSamples}</b> fixes.`;
+    $("btn-finish").disabled = true;
+  } else if(m==="perim"||m==="line"){
+    btn.disabled = false; icon.textContent= captureState.shape ? "+" : "▱";
+    lbl.textContent= captureState.shape ? "VERTEX" : (m==="perim"?"START":"START");
+    btn.classList.remove("busy");
+    const n = captureState.shape ? captureState.shape.vertices.length : 0;
+    if(captureState.shape){
+      $("caphint").innerHTML = `Vertex <b>${n}</b>${m==="perim"?" (≥3 to close)":" (≥2 for line)"} · tap <b>✓</b> when done`;
+    } else {
+      $("caphint").innerHTML = m==="perim" ? "Walk to the first corner and tap the button" : "Walk to the start and tap the button";
+    }
+    const need = m==="perim" ? 3 : 2;
+    $("btn-finish").disabled = !(captureState.shape && n>=need);
+    $("btn-finish").classList.toggle("go", captureState.shape && n>=need);
+  } else if(m==="tape"){
+    btn.disabled = false; icon.textContent="↔"; lbl.textContent="TAPE";
+    btn.classList.remove("busy");
+    $("caphint").innerHTML = "Tap to open the compass.";
+    $("btn-finish").disabled = true;
+  }
+  $("btn-undo").disabled = !(captureState.shape && captureState.shape.vertices.length>0) && caps.length===0;
+}
+
+function setMode(m){
+  captureState.mode = m;
+  qsa("#mode-tabs button").forEach(b=>b.setAttribute("aria-selected", b.dataset.mode===m ? "true":"false"));
+  // Cancel any in-progress shape if switching out of perim/line
+  if(m!=="perim" && m!=="line" && captureState.shape){
+    if(captureState.shape.vertices.length>0){ toast("Shape cancelled","err"); }
+    captureState.shape = null;
+  }
+  refreshCapButton();
+  mapDraw();
+}
+
+/* ---- POINT mode averaging ---- */
 function collectSample(){
   if(!lastFix) return;
-  sampleBuf.push({lat:lastFix.lat, lon:lastFix.lon, acc:lastFix.acc});
-  $("p-status").textContent=`Averaging… ${sampleBuf.length}/${needSamples}`;
-  if(sampleBuf.length>=needSamples) finishAverage();
+  captureState.samples.push({lat:lastFix.lat, lon:lastFix.lon, acc:lastFix.acc});
+  setRingProgress(captureState.samples.length / captureState.needSamples);
+  refreshCapButton();
+  if(captureState.samples.length >= captureState.needSamples) finishAverage();
 }
-$("p-go").addEventListener("click", ()=>{
-  if(!lastFix){ toast("No fix yet",true); return; }
-  needSamples=Math.max(1, parseInt($("p-n").value)||8);
-  sampleBuf=[]; averaging=true; $("p-go").disabled=true;
-  $("p-status").textContent=`Averaging… 0/${needSamples}`;
+function startAverage(){
+  if(!lastFix){ toast("No GPS fix","err"); return; }
+  captureState.samples = []; captureState.averaging = true;
+  captureState.needSamples = Math.max(1, parseInt(prefs.psamples||8));
+  setRingProgress(0);
   collectSample();
-});
+  refreshCapButton();
+}
 function finishAverage(){
-  averaging=false; $("p-go").disabled=(watchId===null);
-  const n=sampleBuf.length;
-  const lat=sampleBuf.reduce((s,p)=>s+p.lat,0)/n;
-  const lon=sampleBuf.reduce((s,p)=>s+p.lon,0)/n;
-  const acc=sampleBuf.reduce((s,p)=>s+p.acc,0)/n;     // mean reported horizontal accuracy
-  const g=$("group").value;
-  caps.push({id:uid(),group:g,label:nextLabel(g),type:"point",
-    lat:+lat.toFixed(7),lon:+lon.toFixed(7),acc:+acc.toFixed(2),samples:n,
-    confidence:$("p-conf").value,note:$("p-note").value.trim(),ts:new Date().toISOString()});
-  save(LS_CAPS,caps); $("p-note").value=""; render();
-  $("p-status").textContent=`Saved (mean of ${n}, acc ${acc.toFixed(1)} m). Set phone down for next.`;
-  toast("Point saved · "+acc.toFixed(1)+" m");
+  captureState.averaging = false;
+  const buf = captureState.samples; const n = buf.length;
+  if(!n) return;
+  const lat = buf.reduce((s,p)=>s+p.lat,0)/n;
+  const lon = buf.reduce((s,p)=>s+p.lon,0)/n;
+  const acc = buf.reduce((s,p)=>s+p.acc,0)/n;
+  const g = prefs.currentGroup || groups[0];
+  const rec = {
+    id: uid(), group: g, label: nextLabel(g), type: "point",
+    lat: +lat.toFixed(7), lon: +lon.toFixed(7), acc: +acc.toFixed(2), samples: n,
+    confidence: prefs.currentConf || "good",
+    note: captureState.pendingNote || "",
+    photo: captureState.pendingPhoto || null,
+    ts: new Date().toISOString()
+  };
+  caps.push(rec); save(LS_CAPS, caps);
+  captureState.pendingPhoto = null; captureState.pendingNote = "";
+  refreshMetaChips(); renderCaptureList(); refreshCapButton(); mapDraw(); queueSync();
+  toast(`Point saved · ±${acc.toFixed(1)} m`);
+  setRingProgress(0);
 }
 
-/* ---------------- PERIMETER mode ---------------- */
-let shape=null;   // {vertices:[{lat,lon,acc}]}
-function pmRefresh(){
-  const live=!!shape;
-  $("pm-start").disabled=live; $("pm-drop").disabled=!live;
-  const has=live&&shape.vertices.length>0;
-  $("pm-close").disabled=!(live&&shape.vertices.length>=3);
-  $("pm-end").disabled=!(live&&shape.vertices.length>=2);
-  $("pm-cancel").disabled=!live;
-  $("pm-count").value= shape? shape.vertices.length : 0;
-  $("pm-vtx").innerHTML = shape? shape.vertices.map((v,i)=>
-    `${String(i+1).padStart(2,"0")}  ${v.lat.toFixed(6)}, ${v.lon.toFixed(6)}  ±${v.acc.toFixed(1)}m`).join("<br>") : "";
+/* ---- PERIM / LINE ---- */
+function dropVertexOrStart(){
+  if(!lastFix){ toast("No GPS fix","err"); return; }
+  if(!captureState.shape){ captureState.shape = {vertices:[]}; }
+  captureState.shape.vertices.push({lat:+lastFix.lat.toFixed(7), lon:+lastFix.lon.toFixed(7), acc:+lastFix.acc.toFixed(2)});
+  toast("Vertex "+captureState.shape.vertices.length);
+  refreshCapButton(); mapDraw();
 }
-$("pm-start").addEventListener("click",()=>{ shape={vertices:[]}; pmRefresh(); toast("Shape started"); });
-$("pm-drop").addEventListener("click",()=>{
-  if(!lastFix){ toast("No fix yet",true); return; }
-  shape.vertices.push({lat:+lastFix.lat.toFixed(7),lon:+lastFix.lon.toFixed(7),acc:+lastFix.acc.toFixed(2)});
-  pmRefresh(); toast("Vertex "+shape.vertices.length);
-});
-$("pm-close").addEventListener("click",()=>finishShape("polygon"));
-$("pm-end").addEventListener("click",()=>finishShape("line"));
-$("pm-cancel").addEventListener("click",()=>{ shape=null; pmRefresh(); });
-function finishShape(kind){
-  const g=$("group").value, vtx=shape.vertices.slice();
-  const worst=Math.max(...vtx.map(v=>v.acc));
-  const rec={id:uid(),group:g,label:nextLabel(g),type:kind,vertices:vtx,
-    acc:+worst.toFixed(2),samples:vtx.length,confidence:$("pm-conf").value,
-    note:$("pm-note").value.trim(),ts:new Date().toISOString()};
-  caps.push(rec); save(LS_CAPS,caps);
-  const m = kind==="polygon" ? "area "+areaM2(vtx).toFixed(0)+" m²" : "length "+lineLenM(vtx).toFixed(1)+" m";
-  shape=null; $("pm-note").value=""; pmRefresh(); render();
-  toast((kind==="polygon"?"Polygon":"Line")+" saved · "+m);
+function finishShape(){
+  if(!captureState.shape) return;
+  const m = captureState.mode; const kind = m==="perim" ? "polygon" : "line";
+  const need = kind==="polygon" ? 3 : 2;
+  const vtx = captureState.shape.vertices.slice();
+  if(vtx.length < need){ toast(`Need ≥${need} vertices`,"err"); return; }
+  const worst = Math.max(...vtx.map(v=>v.acc));
+  const g = prefs.currentGroup || groups[0];
+  const rec = {
+    id: uid(), group: g, label: nextLabel(g), type: kind, vertices: vtx,
+    acc: +worst.toFixed(2), samples: vtx.length, confidence: prefs.currentConf || "good",
+    note: captureState.pendingNote || "",
+    photo: captureState.pendingPhoto || null,
+    ts: new Date().toISOString()
+  };
+  caps.push(rec); save(LS_CAPS, caps);
+  captureState.shape = null;
+  captureState.pendingPhoto = null; captureState.pendingNote = "";
+  refreshMetaChips(); renderCaptureList(); refreshCapButton(); mapDraw(); queueSync();
+  const measure = kind==="polygon" ? "area "+polyAreaM2(vtx).toFixed(0)+" m²" : "length "+lineLenM(vtx).toFixed(1)+" m";
+  toast(`${kind==="polygon"?"Area":"Line"} saved · ${measure}`);
 }
 
-/* ---- projected geometry (equirectangular, SW-anchored is irrelevant for area/length) ---- */
+/* ---- UNDO ---- */
+function undoLast(){
+  if(captureState.shape && captureState.shape.vertices.length){
+    captureState.shape.vertices.pop();
+    if(captureState.shape.vertices.length===0) captureState.shape=null;
+    refreshCapButton(); mapDraw();
+    toast("Undid vertex","info");
+    return;
+  }
+  if(caps.length){
+    const last = caps.pop();
+    save(LS_CAPS, caps); renderCaptureList(); refreshCapButton(); mapDraw(); queueSync();
+    toast("Undid "+last.label, "info");
+    return;
+  }
+  toast("Nothing to undo","err");
+}
+
+/* ---- TAPE ---- */
+function computeTape(){
+  const aId = $("tp-anchor").value;
+  const anchor = caps.find(c=>c.id===aId && c.type==="point");
+  if(!anchor){ toast("Pick an anchor point","err"); return; }
+  const d = parseFloat($("tp-dist").value);
+  const brg = parseFloat($("tp-brg").value);
+  if(!(d>0)){ toast("Enter a distance","err"); return; }
+  if(!(brg>=0 && brg<=360)){ toast("Bearing must be 0–360","err"); return; }
+  const dM = $("tp-unit").value==="ft" ? d*FT_TO_M : d;
+  const b = brg*Math.PI/180;
+  const dN = dM*Math.cos(b), dE = dM*Math.sin(b);
+  const lat = anchor.lat + dN/M_PER_DEG_LAT;
+  const lon = anchor.lon + dE/M_PER_DEG_LON;
+  const g = prefs.currentGroup || groups[0];
+  const rec = {
+    id: uid(), group: g, label: nextLabel(g), type: "point",
+    lat: +lat.toFixed(7), lon: +lon.toFixed(7), acc: anchor.acc, samples: 0,
+    confidence: prefs.currentConf || "good",
+    note: `[tape ${d}${$("tp-unit").value} @${brg}° from ${anchor.label}] ` + ($("tp-note").value.trim()),
+    photo: captureState.pendingPhoto || null,
+    ts: new Date().toISOString()
+  };
+  caps.push(rec); save(LS_CAPS, caps);
+  captureState.pendingPhoto = null;
+  closeSheet("tape");
+  refreshMetaChips(); renderCaptureList(); refreshCapButton(); mapDraw(); queueSync();
+  toast("Tape offset saved");
+}
+
+/* ---- geometry helpers ---- */
 function projXY(lat,lon,lat0,lon0){ return {x:(lon-lon0)*M_PER_DEG_LON, y:(lat-lat0)*M_PER_DEG_LAT}; }
-function areaM2(v){
+function polyAreaM2(v){
   const lat0=v[0].lat, lon0=v[0].lon; let s=0;
   const p=v.map(q=>projXY(q.lat,q.lon,lat0,lon0));
   for(let i=0;i<p.length;i++){ const j=(i+1)%p.length; s+=p[i].x*p[j].y - p[j].x*p[i].y; }
@@ -383,161 +1083,563 @@ function lineLenM(v){
   return L;
 }
 
-/* ---------------- TAPE / OFFSET mode ---------------- */
-$("tp-go").addEventListener("click",()=>{
-  const aId=$("tp-anchor").value;
-  const anchor=caps.find(c=>c.id===aId && c.type==="point");
-  if(!anchor){ toast("Pick a saved point as anchor",true); return; }
-  let d=parseFloat($("tp-dist").value);
-  const brg=parseFloat($("tp-brg").value);
-  if(!(d>0)){ toast("Enter a distance",true); return; }
-  if(!(brg>=0&&brg<=360)){ toast("Bearing must be 0–360",true); return; }
-  const unit=$("tp-unit").value; const dM = unit==="ft" ? d*FT_TO_M : d;
-  const b=brg*Math.PI/180;
-  const dN=dM*Math.cos(b), dE=dM*Math.sin(b);
-  const dlat=dN/M_PER_DEG_LAT, dlon=dE/M_PER_DEG_LON;
-  const lat=anchor.lat+dlat, lon=anchor.lon+dlon;
-  const math =
-`anchor  ${anchor.label}: ${anchor.lat.toFixed(6)}, ${anchor.lon.toFixed(6)}
-d = ${d} ${unit}${unit==="ft"?` = ${dM.toFixed(3)} m`:""} ;  β = ${brg}° true
-dN = d·cosβ = ${dN.toFixed(3)} m   dE = d·sinβ = ${dE.toFixed(3)} m
-dlat = dN/111320 = ${dlat.toExponential(4)}°
-dlon = dE/73581.8 = ${dlon.toExponential(4)}°
-→ ${lat.toFixed(7)}, ${lon.toFixed(7)}`;
-  $("tp-math").style.display="block"; $("tp-math").textContent=math;
-  const g=$("group").value;
-  caps.push({id:uid(),group:g,label:nextLabel(g),type:"point",
-    lat:+lat.toFixed(7),lon:+lon.toFixed(7),acc:anchor.acc,samples:0,
-    confidence:$("tp-conf").value,
-    note:("[tape "+d+unit+" @"+brg+"° from "+anchor.label+"] "+$("tp-note").value.trim()).trim(),
-    ts:new Date().toISOString()});
-  save(LS_CAPS,caps); render(); toast("Offset point saved");
+/* ============================================================
+   PHOTO ATTACHMENT
+   ============================================================ */
+const photoInput = $("photo-input");
+$("chip-photo").addEventListener("click", ()=>{
+  if(captureState.pendingPhoto){
+    captureState.pendingPhoto = null; refreshMetaChips(); toast("Photo cleared","info"); return;
+  }
+  photoInput.click();
+});
+photoInput.addEventListener("change", async ()=>{
+  const file = photoInput.files && photoInput.files[0];
+  photoInput.value = "";
+  if(!file) return;
+  try{
+    const url = await downsampleImage(file, 800, 0.72);
+    if(editingCapId){ // applies to edit sheet
+      $("ed-thumb").style.backgroundImage = `url("${url}")`;
+      $("ed-thumb").textContent = "";
+      $("ed-thumb").dataset.photo = url;
+    } else {
+      captureState.pendingPhoto = url;
+      refreshMetaChips(); toast("Photo ready for next capture","info");
+    }
+  } catch(e){ toast("Photo failed: "+e.message,"err"); }
+});
+function downsampleImage(file, maxDim, quality){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onerror = ()=>reject(new Error("read failed"));
+    reader.onload = e=>{
+      const img = new Image();
+      img.onload = ()=>{
+        let w=img.naturalWidth, h=img.naturalHeight;
+        const scale = Math.min(1, maxDim/Math.max(w,h));
+        w = Math.round(w*scale); h = Math.round(h*scale);
+        const c = document.createElement("canvas"); c.width=w; c.height=h;
+        c.getContext("2d").drawImage(img,0,0,w,h);
+        try{ resolve(c.toDataURL("image/jpeg", quality)); }
+        catch(err){ reject(err); }
+      };
+      img.onerror = ()=>reject(new Error("decode failed"));
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ============================================================
+   NOTE chip (pending note for next capture)
+   ============================================================ */
+$("chip-note").addEventListener("click", ()=>{
+  const cur = captureState.pendingNote || "";
+  const v = prompt("Note for next capture:", cur);
+  if(v===null) return;
+  captureState.pendingNote = v.trim();
+  refreshMetaChips();
 });
 
-/* ---------------- groups ---------------- */
-function refreshGroupSelect(){
-  const sel=$("group"), cur=sel.value;
-  sel.innerHTML=groups.map(g=>`<option>${g.replace(/</g,"&lt;")}</option>`).join("");
-  if(groups.includes(cur)) sel.value=cur;
+/* ============================================================
+   META chips (group, confidence, photo, note)
+   ============================================================ */
+function refreshMetaChips(){
+  $("sel-group").value = prefs.currentGroup || groups[0] || "";
+  $("conf-label").textContent = prefs.currentConf || "good";
+  const chip = $("chip-conf");
+  chip.className = "chip cf-"+(prefs.currentConf||"good");
+  // photo
+  $("photo-state").textContent = captureState.pendingPhoto ? "✓ photo" : "photo";
+  $("chip-photo").className = "chip" + (captureState.pendingPhoto ? " has-content" : "");
+  // note
+  const n = captureState.pendingNote;
+  $("note-state").textContent = n ? (n.length>14 ? n.slice(0,12)+"…" : n) : "note";
+  $("chip-note").className = "chip" + (n ? " has-content" : "");
 }
-$("g-add").addEventListener("click",()=>{ const n=prompt("New group name:"); if(n&&!groups.includes(n)){groups.push(n);save(LS_GROUPS,groups);refreshGroupSelect();$("group").value=n;} });
-$("g-ren").addEventListener("click",()=>{ const old=$("group").value, n=prompt("Rename group:",old);
-  if(n&&n!==old){ groups=groups.map(g=>g===old?n:g); caps.forEach(c=>{if(c.group===old)c.group=n;}); save(LS_GROUPS,groups);save(LS_CAPS,caps);refreshGroupSelect();$("group").value=n;render(); } });
-$("g-del").addEventListener("click",()=>{ const g=$("group").value; const n=caps.filter(c=>c.group===g).length;
-  if(!confirm(`Delete group "${g}"?`+(n?` Its ${n} capture(s) stay but become ungrouped-by-name.`:""))) return;
-  groups=groups.filter(x=>x!==g); save(LS_GROUPS,groups); refreshGroupSelect(); });
+$("chip-conf").addEventListener("click", ()=>{
+  const order=["good","anchor","rough"];
+  const cur = prefs.currentConf || "good";
+  const next = order[(order.indexOf(cur)+1)%order.length];
+  prefs.currentConf = next; save(LS_PREFS, prefs); refreshMetaChips();
+});
+$("sel-group").addEventListener("change", ()=>{
+  prefs.currentGroup = $("sel-group").value; save(LS_PREFS, prefs);
+});
 
-/* ---------------- mode tabs ---------------- */
-function setMode(m){
-  ["point","perim","tape"].forEach(k=>{
-    $("t-"+k).setAttribute("aria-selected", k===m);
-    $("m-"+k).classList.toggle("active", k===m);
-  });
-  if(m==="tape") refreshAnchors();
-}
-$("t-point").onclick=()=>setMode("point");
-$("t-perim").onclick=()=>setMode("perim");
-$("t-tape").onclick =()=>setMode("tape");
-$("p-n").addEventListener("input",()=>$("p-nlbl").textContent=$("p-n").value||"8");
-function refreshAnchors(){
-  const pts=caps.filter(c=>c.type==="point");
-  $("tp-anchor").innerHTML = pts.length
-    ? pts.map(c=>`<option value="${c.id}">${c.label} (${c.group})</option>`).join("")
-    : `<option value="">— no saved points yet —</option>`;
+function refreshGroupSelects(){
+  const opts = groups.map(g=>`<option>${escHTML(g)}</option>`).join("");
+  $("sel-group").innerHTML = opts;
+  $("ed-group").innerHTML = opts;
+  if(prefs.currentGroup && groups.includes(prefs.currentGroup)) $("sel-group").value = prefs.currentGroup;
 }
 
-/* ---------------- render captures ---------------- */
-function render(){
-  $("cap-total").textContent=caps.length;
-  $("cap-list").querySelector? null:null;
-  const host=$("cap-list");
-  if(!caps.length){ host.innerHTML='<div class="empty">Nothing captured yet.</div>'; refreshAnchors(); return; }
-  const byG={}; caps.forEach(c=>{ (byG[c.group]=byG[c.group]||[]).push(c); });
-  host.innerHTML=Object.keys(byG).map(g=>{
-    const rows=byG[g].map(c=>{
-      const geom = c.type==="point"
+/* ============================================================
+   CAPTURE LIST + EDIT
+   ============================================================ */
+let editingCapId = null;
+function renderCaptureList(){
+  $("cap-total").textContent = caps.length;
+  const host = $("cap-list");
+  if(!caps.length){
+    host.innerHTML = '<div class="cap-empty">Nothing captured yet. Switch to a mode and tap the big yellow button.</div>';
+    refreshAnchors(); return;
+  }
+  const byG = {}; caps.forEach(c=>{ (byG[c.group]=byG[c.group]||[]).push(c); });
+  let html="";
+  Object.keys(byG).forEach(g=>{
+    const items = byG[g].slice().reverse();
+    html += `<div class="cap-grp"><div class="cap-grp-hdr">${escHTML(g)}<span class="ct">${byG[g].length}</span></div>`;
+    items.forEach(c=>{
+      const thumb = c.photo
+        ? `<div class="thumb" style="background-image:url('${c.photo}')"></div>`
+        : `<div class="thumb">${c.type==="point"?"●":c.type==="line"?"／":"▱"}</div>`;
+      const detail = c.type==="point"
         ? `${c.lat.toFixed(6)}, ${c.lon.toFixed(6)} · ±${c.acc}m${c.samples?` · n=${c.samples}`:""}`
         : c.type==="polygon"
-          ? `${c.vertices.length} vtx · ${areaM2(c.vertices).toFixed(0)} m² · ±${c.acc}m`
+          ? `${c.vertices.length} vtx · ${polyAreaM2(c.vertices).toFixed(0)} m² · ±${c.acc}m`
           : `${c.vertices.length} vtx · ${lineLenM(c.vertices).toFixed(1)} m · ±${c.acc}m`;
-      return `<div class="cap"><div><b>${c.label}</b>
-        <span class="tag tag-${c.confidence}">${c.confidence}</span>
-        <span style="color:var(--dim)">· ${c.type}</span>
-        <div class="meta">${geom}</div>
-        ${c.note?`<div class="meta" style="color:var(--ink)">${c.note.replace(/</g,"&lt;")}</div>`:""}</div>
-        <button class="del" data-id="${c.id}">✕</button></div>`;
-    }).join("");
-    return `<details class="cap-group" open><summary>${g.replace(/</g,"&lt;")}<span class="count">${byG[g].length}</span></summary>${rows}</details>`;
-  }).join("");
-  host.querySelectorAll("button.del").forEach(b=>b.onclick=()=>{
-    if(!confirm("Delete this capture?")) return;
-    caps=caps.filter(c=>c.id!==b.dataset.id); save(LS_CAPS,caps); render();
+      html += `<div class="cap-row" data-id="${c.id}">
+        ${thumb}
+        <div class="body">
+          <div class="lbl">${escHTML(c.label)} <span class="tag tag-${c.confidence}">${c.confidence}</span><span class="tag tag-pt">${c.type}</span></div>
+          <div class="sub">${escHTML(detail)}</div>
+          ${c.note ? `<div class="sub" style="color:var(--ink)">${escHTML(c.note)}</div>` : ""}
+        </div>
+        <span style="color:var(--dim);font-size:18px">›</span>
+      </div>`;
+    });
+    html += "</div>";
+  });
+  host.innerHTML = html;
+  host.querySelectorAll(".cap-row").forEach(row=>{
+    row.addEventListener("click", ()=>openEdit(row.dataset.id));
   });
   refreshAnchors();
 }
 
-/* ---------------- exports ---------------- */
-function dl(name,text,mime){
-  const blob=new Blob([text],{type:mime});
-  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name;
-  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+function openEdit(id){
+  const c = caps.find(x=>x.id===id); if(!c) return;
+  editingCapId = id;
+  $("edit-title").textContent = "Edit · "+c.label;
+  $("ed-label").value = c.label;
+  $("ed-group").value = c.group;
+  $("ed-conf").value = c.confidence;
+  $("ed-note").value = c.note || "";
+  if(c.photo){ $("ed-thumb").style.backgroundImage = `url("${c.photo}")`; $("ed-thumb").textContent=""; $("ed-thumb").dataset.photo = c.photo; }
+  else { $("ed-thumb").style.backgroundImage = ""; $("ed-thumb").textContent="—"; $("ed-thumb").dataset.photo = ""; }
+  openSheet("edit");
+}
+$("ed-photo-pick").addEventListener("click", ()=>photoInput.click());
+$("ed-photo-clear").addEventListener("click", ()=>{
+  $("ed-thumb").style.backgroundImage = ""; $("ed-thumb").textContent="—"; $("ed-thumb").dataset.photo = "";
+});
+$("ed-save").addEventListener("click", ()=>{
+  const c = caps.find(x=>x.id===editingCapId); if(!c) return;
+  c.label = $("ed-label").value.trim() || c.label;
+  c.group = $("ed-group").value;
+  c.confidence = $("ed-conf").value;
+  c.note = $("ed-note").value.trim();
+  c.photo = $("ed-thumb").dataset.photo || null;
+  c.edited_ts = new Date().toISOString();
+  save(LS_CAPS, caps);
+  editingCapId = null;
+  closeSheet("edit");
+  renderCaptureList(); mapDraw(); queueSync();
+  toast("Saved");
+});
+$("ed-delete").addEventListener("click", ()=>{
+  if(!confirm("Delete this capture?")) return;
+  caps = caps.filter(c=>c.id!==editingCapId);
+  save(LS_CAPS, caps);
+  editingCapId = null;
+  closeSheet("edit");
+  renderCaptureList(); mapDraw(); queueSync();
+  toast("Deleted");
+});
+
+function refreshAnchors(){
+  const pts = caps.filter(c=>c.type==="point");
+  $("tp-anchor").innerHTML = pts.length
+    ? pts.map(c=>`<option value="${c.id}">${escHTML(c.label)} (${escHTML(c.group)})</option>`).join("")
+    : `<option value="">— no saved points yet —</option>`;
+  $("tp-go").disabled = !pts.length;
+}
+
+/* ============================================================
+   COMPASS (Tape bearing)
+   ============================================================ */
+function buildCompass(){
+  const ticks = $("compass-ticks"), labels = $("compass-labels");
+  let t="";
+  for(let deg=0; deg<360; deg+=5){
+    const a = (deg-90)*Math.PI/180;
+    const major = deg%45===0;
+    const r1 = major ? 92 : 100;
+    const r2 = 108;
+    const x1 = 120 + Math.cos(a)*r1, y1 = 120 + Math.sin(a)*r1;
+    const x2 = 120 + Math.cos(a)*r2, y2 = 120 + Math.sin(a)*r2;
+    t += `<line class="${major?'major':''}" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`;
+  }
+  ticks.innerHTML = t;
+  const lbls = [["N",0],["E",90],["S",180],["W",270]];
+  let l="";
+  lbls.forEach(([lab,deg])=>{
+    const a=(deg-90)*Math.PI/180;
+    const x=120+Math.cos(a)*78, y=120+Math.sin(a)*78+5;
+    l += `<text class="compass-lbl" x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle">${lab}</text>`;
+  });
+  // small numeric labels every 30°
+  for(let deg=30; deg<360; deg+=30){
+    if(deg%90===0) continue;
+    const a=(deg-90)*Math.PI/180;
+    const x=120+Math.cos(a)*72, y=120+Math.sin(a)*72+3;
+    l += `<text class="compass-dim" x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle">${deg}</text>`;
+  }
+  labels.innerHTML = l;
+}
+function setBearing(b){
+  let bb = ((b % 360) + 360) % 360;
+  $("brg-readout").textContent = bb.toFixed(0)+"°";
+  $("tp-brg").value = bb.toFixed(0);
+  const a = (bb-90)*Math.PI/180;
+  const x = 120 + Math.cos(a)*88, y = 120 + Math.sin(a)*88;
+  $("needle-fwd").setAttribute("x2", x.toFixed(1)); $("needle-fwd").setAttribute("y2", y.toFixed(1));
+  const bx = 120 - Math.cos(a)*40, by = 120 - Math.sin(a)*40;
+  $("needle-back").setAttribute("x2", bx.toFixed(1)); $("needle-back").setAttribute("y2", by.toFixed(1));
+}
+let compassDragging = false;
+function compassXYToBearing(clientX, clientY){
+  const r = $("compass").getBoundingClientRect();
+  const cx = r.left + r.width/2, cy = r.top + r.height/2;
+  const dx = clientX-cx, dy = clientY-cy;
+  let b = Math.atan2(dy, dx)*180/Math.PI + 90;
+  return ((b%360)+360)%360;
+}
+$("compass").addEventListener("touchstart", e=>{
+  compassDragging = true;
+  setBearing(compassXYToBearing(e.touches[0].clientX, e.touches[0].clientY));
+  e.preventDefault();
+}, {passive:false});
+$("compass").addEventListener("touchmove", e=>{
+  if(!compassDragging) return;
+  setBearing(compassXYToBearing(e.touches[0].clientX, e.touches[0].clientY));
+  e.preventDefault();
+}, {passive:false});
+$("compass").addEventListener("touchend", ()=>{ compassDragging=false; });
+$("compass").addEventListener("mousedown", e=>{ compassDragging=true; setBearing(compassXYToBearing(e.clientX,e.clientY)); });
+window.addEventListener("mousemove", e=>{ if(compassDragging) setBearing(compassXYToBearing(e.clientX,e.clientY)); });
+window.addEventListener("mouseup", ()=>{ compassDragging=false; });
+$("tp-brg").addEventListener("input", ()=>{
+  const v = parseFloat($("tp-brg").value);
+  if(!isNaN(v)) setBearing(v);
+});
+
+/* device orientation */
+let orientWatching = false;
+function startOrient(){
+  if(orientWatching){
+    window.removeEventListener("deviceorientation", onOrient);
+    window.removeEventListener("deviceorientationabsolute", onOrient);
+    orientWatching = false;
+    $("btn-orient").textContent = "Use phone orientation";
+    $("btn-orient").classList.remove("primary");
+    return;
+  }
+  const go = ()=>{
+    window.addEventListener("deviceorientationabsolute", onOrient, true);
+    window.addEventListener("deviceorientation", onOrient, true);
+    orientWatching = true;
+    $("btn-orient").textContent = "Stop using orientation";
+    $("btn-orient").classList.add("primary");
+  };
+  if(typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function"){
+    DeviceOrientationEvent.requestPermission().then(s=>{
+      if(s==="granted") go(); else toast("Permission denied","err");
+    }).catch(e=>toast("Permission error: "+e.message,"err"));
+  } else { go(); }
+}
+function onOrient(e){
+  // iOS reports webkitCompassHeading (0..360, magnetic, true-ish on iPhones with magnetometer)
+  let h = e.webkitCompassHeading;
+  if(h===undefined && e.alpha!==null){
+    // alpha is 0..360 counterclockwise from device-orientation axis. This isn't reliable across platforms but acceptable as a fallback.
+    h = 360 - e.alpha;
+  }
+  if(h===undefined || h===null) return;
+  setBearing(h);
+}
+$("btn-orient").addEventListener("click", startOrient);
+
+/* ============================================================
+   EXPORTS (KML / GeoJSON / CSV)
+   ============================================================ */
+function dl(name, text, mime){
+  const blob = new Blob([text],{type:mime});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
   toast("Exported "+name);
 }
-const stamp=()=>new Date().toISOString().slice(0,16).replace(/[:T]/g,"");
-$("x-csv").onclick=()=>{
-  const head=["type","group","label","vertex_index","lat","lon","accuracy_m","samples","confidence","note","utc"];
-  const rows=[head.join(",")];
-  const esc=s=>`"${String(s??"").replace(/"/g,'""')}"`;
+const stamp = ()=>new Date().toISOString().slice(0,16).replace(/[:T]/g,"");
+function capsToGeoJSONString(pretty){
+  const feats = caps.map(c=>{
+    let geom;
+    if(c.type==="point") geom = {type:"Point", coordinates:[c.lon, c.lat]};
+    else if(c.type==="line") geom = {type:"LineString", coordinates:c.vertices.map(v=>[v.lon,v.lat])};
+    else { const r = c.vertices.map(v=>[v.lon,v.lat]); if(r.length) r.push(r[0]); geom = {type:"Polygon", coordinates:[r]}; }
+    return { type:"Feature", geometry:geom, properties:{
+      id:c.id, group:c.group, label:c.label, type:c.type,
+      accuracy_m:c.acc, samples:c.samples, confidence:c.confidence,
+      note:c.note, utc:c.ts, edited_utc:c.edited_ts||null,
+      photo_data_url: c.photo || null
+    }};
+  });
+  const obj = { type:"FeatureCollection",
+    metadata:{ generated:new Date().toISOString(), count:caps.length, source:"bf-fieldgps-v3" },
+    features:feats };
+  return pretty ? JSON.stringify(obj,null,2) : JSON.stringify(obj);
+}
+$("x-csv").onclick = ()=>{
+  const head = ["type","group","label","vertex_index","lat","lon","accuracy_m","samples","confidence","note","has_photo","utc"];
+  const rows = [head.join(",")];
+  const esc = s => `"${String(s??"").replace(/"/g,'""')}"`;
   caps.forEach(c=>{
-    if(c.type==="point"){ rows.push([c.type,esc(c.group),esc(c.label),0,c.lat,c.lon,c.acc,c.samples,c.confidence,esc(c.note),c.ts].join(",")); }
-    else c.vertices.forEach((v,i)=>rows.push([c.type,esc(c.group),esc(c.label),i,v.lat,v.lon,v.acc,"",c.confidence,esc(c.note),c.ts].join(",")));
+    const hasPhoto = c.photo ? "1" : "0";
+    if(c.type==="point") rows.push([c.type,esc(c.group),esc(c.label),0,c.lat,c.lon,c.acc,c.samples,c.confidence,esc(c.note),hasPhoto,c.ts].join(","));
+    else c.vertices.forEach((v,i)=>rows.push([c.type,esc(c.group),esc(c.label),i,v.lat,v.lon,v.acc,"",c.confidence,esc(c.note),hasPhoto,c.ts].join(",")));
   });
   dl(`bf_captures_${stamp()}.csv`, rows.join("\n"), "text/csv");
 };
-$("x-geo").onclick=()=>{
-  const feats=caps.map(c=>{
-    let geom;
-    if(c.type==="point") geom={type:"Point",coordinates:[c.lon,c.lat]};
-    else if(c.type==="line") geom={type:"LineString",coordinates:c.vertices.map(v=>[v.lon,v.lat])};
-    else { const r=c.vertices.map(v=>[v.lon,v.lat]); if(r.length){r.push(r[0]);} geom={type:"Polygon",coordinates:[r]}; }
-    return {type:"Feature",geometry:geom,properties:{group:c.group,label:c.label,type:c.type,
-      accuracy_m:c.acc,samples:c.samples,confidence:c.confidence,note:c.note,utc:c.ts}};
-  });
-  dl(`bf_captures_${stamp()}.geojson`, JSON.stringify({type:"FeatureCollection",features:feats},null,2), "application/geo+json");
-};
-$("x-kml").onclick=()=>{
-  const x=s=>String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-  const byG={}; caps.forEach(c=>{ (byG[c.group]=byG[c.group]||[]).push(c); });
-  let body="";
+$("x-geo").onclick = ()=>dl(`bf_captures_${stamp()}.geojson`, capsToGeoJSONString(true), "application/geo+json");
+$("x-kml").onclick = ()=>{
+  const x = s => String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  const byG = {}; caps.forEach(c=>{ (byG[c.group]=byG[c.group]||[]).push(c); });
+  let body = "";
   Object.keys(byG).forEach(g=>{
-    body+=`  <Folder><name>${x(g)}</name>\n`;
+    body += `  <Folder><name>${x(g)}</name>\n`;
     byG[g].forEach(c=>{
-      const desc=`acc ${c.acc} m | conf ${c.confidence} | samples ${c.samples} | ${x(c.note)} | ${c.ts}`;
-      if(c.type==="point"){
-        body+=`    <Placemark><name>${x(c.label)}</name><description>${x(desc)}</description>`+
-              `<Point><coordinates>${c.lon},${c.lat},0</coordinates></Point></Placemark>\n`;
-      } else if(c.type==="line"){
-        const co=c.vertices.map(v=>`${v.lon},${v.lat},0`).join(" ");
-        body+=`    <Placemark><name>${x(c.label)}</name><description>${x(desc)}</description>`+
-              `<LineString><tessellate>1</tessellate><coordinates>${co}</coordinates></LineString></Placemark>\n`;
-      } else {
-        const r=c.vertices.map(v=>`${v.lon},${v.lat},0`); if(r.length)r.push(r[0]);
-        body+=`    <Placemark><name>${x(c.label)}</name><description>${x(desc)}</description>`+
-              `<Polygon><outerBoundaryIs><LinearRing><coordinates>${r.join(" ")}</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>\n`;
-      }
+      const desc = `acc ${c.acc} m | conf ${c.confidence} | samples ${c.samples} | ${x(c.note)} | ${c.ts}` + (c.photo?" | [photo attached]":"");
+      if(c.type==="point") body += `    <Placemark><name>${x(c.label)}</name><description>${x(desc)}</description><Point><coordinates>${c.lon},${c.lat},0</coordinates></Point></Placemark>\n`;
+      else if(c.type==="line"){ const co=c.vertices.map(v=>`${v.lon},${v.lat},0`).join(" "); body+=`    <Placemark><name>${x(c.label)}</name><description>${x(desc)}</description><LineString><tessellate>1</tessellate><coordinates>${co}</coordinates></LineString></Placemark>\n`; }
+      else { const r=c.vertices.map(v=>`${v.lon},${v.lat},0`); if(r.length) r.push(r[0]); body+=`    <Placemark><name>${x(c.label)}</name><description>${x(desc)}</description><Polygon><outerBoundaryIs><LinearRing><coordinates>${r.join(" ")}</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>\n`; }
     });
-    body+=`  </Folder>\n`;
+    body += `  </Folder>\n`;
   });
-  const kml=`<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2">\n<Document><name>Bradford/Freer field captures</name>\n${body}</Document>\n</kml>`;
+  const kml = `<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2">\n<Document><name>Bradford/Freer field captures</name>\n${body}</Document>\n</kml>`;
   dl(`bf_captures_${stamp()}.kml`, kml, "application/vnd.google-earth.kml+xml");
 };
-$("x-clear").onclick=()=>{ if(confirm("Delete ALL captures? Export first if unsure.")){ caps=[]; save(LS_CAPS,caps); render(); } };
+$("x-clear").onclick = ()=>{ if(confirm("Delete ALL captures (including photos)? Export first if unsure.")){ caps=[]; save(LS_CAPS,caps); renderCaptureList(); refreshCapButton(); mapDraw(); queueSync(); }};
 
-/* ---------------- boot ---------------- */
-$("btn-gps").addEventListener("click", startGPS);   // <-- was missing: Start/Stop GPS button
-$("gate").addEventListener("input", ()=>{ gateVal=parseFloat($("gate").value)||5; });
-refreshGroupSelect(); $("p-nlbl").textContent=$("p-n").value; render(); setMode("point");
-window.addEventListener("beforeunload",e=>{ if(shape&&shape.vertices.length){ e.preventDefault(); e.returnValue=""; } });
+/* ============================================================
+   GITHUB SYNC
+   ============================================================ */
+function ghConfigured(){ return !!(gh.owner && gh.repo && gh.token && gh.path); }
+function ghHeaders(){ return { "Authorization":"Bearer "+gh.token, "Accept":"application/vnd.github+json", "X-GitHub-Api-Version":"2022-11-28" }; }
+function utf8ToB64(str){
+  const bytes = new TextEncoder().encode(str);
+  let bin=""; const CHUNK=0x8000;
+  for(let i=0;i<bytes.length;i+=CHUNK){ bin += String.fromCharCode.apply(null, bytes.subarray(i,i+CHUNK)); }
+  return btoa(bin);
+}
+function persistSync(){ save(LS_SYNC, {lastSyncTs: syncState.lastSyncTs}); }
+
+async function ghGetSha(){
+  const url = `https://api.github.com/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${gh.path.split("/").map(encodeURIComponent).join("/")}?ref=${encodeURIComponent(gh.branch)}`;
+  const r = await fetch(url, {headers: ghHeaders(), cache:"no-store"});
+  if(r.status===404) return null;
+  if(!r.ok) throw new Error("GET "+r.status+": "+(await r.text()).slice(0,160));
+  const j = await r.json();
+  return j.sha;
+}
+async function ghSync(){
+  if(!ghConfigured()){ toast("Configure GitHub sync first","err"); openSheet("sync"); return; }
+  if(syncState.status==="syncing"){ syncState.pending=true; renderSyncStatus(); return; }
+  syncState.status="syncing"; syncState.lastError=null; renderSyncStatus();
+  try{
+    const sha = await ghGetSha();
+    const content = capsToGeoJSONString(true);
+    const url = `https://api.github.com/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${gh.path.split("/").map(encodeURIComponent).join("/")}`;
+    const body = { message:`field sync: ${caps.length} captures @ ${new Date().toISOString()}`, content: utf8ToB64(content), branch: gh.branch };
+    if(sha) body.sha = sha;
+    const r = await fetch(url, {method:"PUT", headers: Object.assign({},ghHeaders(),{"Content-Type":"application/json"}), body: JSON.stringify(body)});
+    if(!r.ok) throw new Error("PUT "+r.status+": "+(await r.text()).slice(0,160));
+    syncState.status="synced"; syncState.lastSyncTs=new Date().toISOString(); persistSync();
+    toast("Synced ("+caps.length+")","info");
+  } catch(e){
+    syncState.status="error"; syncState.lastError = e.message;
+    toast("Sync failed: "+e.message,"err");
+  } finally {
+    renderSyncStatus();
+    if(syncState.pending){ syncState.pending=false; setTimeout(ghSync, 800); }
+  }
+}
+let _syncDebounce=null;
+function queueSync(){
+  if(!ghConfigured()) return;
+  if(syncState.status!=="syncing"){ syncState.status="queued"; renderSyncStatus(); }
+  clearTimeout(_syncDebounce); _syncDebounce=setTimeout(ghSync, 1500);
+}
+function renderSyncStatus(){
+  const dot = $("sync-dot");
+  dot.className = "sync-dot ";
+  let s="off";
+  if(!ghConfigured()) s="off";
+  else if(syncState.status==="syncing") s="syncing";
+  else if(syncState.status==="queued") s="idle";
+  else if(syncState.status==="error") s="error";
+  else if(syncState.lastSyncTs) s="synced";
+  else s="idle";
+  dot.classList.add("s-"+s);
+  const gs = $("gh-status");
+  if(gs){
+    if(!ghConfigured()) gs.textContent = "Not configured.";
+    else gs.textContent = `${gh.owner}/${gh.repo}@${gh.branch} → ${gh.path}` + (syncState.lastSyncTs?` · last sync ${fmtSync(syncState.lastSyncTs)}`:" · never synced");
+  }
+}
+function ghLoadForm(){
+  $("gh-owner").value = gh.owner || "";
+  $("gh-repo").value = gh.repo || "";
+  $("gh-branch").value = gh.branch || "main";
+  $("gh-path").value = gh.path || "data/captures.geojson";
+  $("gh-token").value = "";
+  $("gh-token").placeholder = gh.token ? "•••• stored — re-enter to replace" : "github_pat_…";
+}
+$("gh-save").addEventListener("click", ()=>{
+  const newTok = $("gh-token").value.trim();
+  gh = {
+    owner: $("gh-owner").value.trim(),
+    repo:  $("gh-repo").value.trim(),
+    branch: $("gh-branch").value.trim() || "main",
+    path: $("gh-path").value.trim() || "data/captures.geojson",
+    token: newTok || gh.token
+  };
+  save(LS_GH, gh);
+  ghLoadForm(); renderSyncStatus();
+  toast(ghConfigured() ? "Settings saved" : "Saved (fill all fields to enable sync)");
+});
+$("gh-test").addEventListener("click", async ()=>{
+  if(!ghConfigured()){ toast("Fill all fields first","err"); return; }
+  try{
+    const url = `https://api.github.com/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}`;
+    const r = await fetch(url, {headers:ghHeaders(), cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status+": "+(await r.text()).slice(0,160));
+    const j = await r.json();
+    toast("OK — "+j.full_name+(j.private?" (private)":" (public)"),"info");
+  } catch(e){ toast("Test failed: "+e.message,"err"); }
+});
+$("gh-sync-now").addEventListener("click", ghSync);
+$("gh-clear").addEventListener("click", ()=>{
+  if(!confirm("Clear sync settings (including token)?")) return;
+  gh = {owner:"", repo:"", branch:"main", path:"data/captures.geojson", token:""};
+  save(LS_GH, gh); ghLoadForm();
+  syncState = {status:"off", lastSyncTs:null, lastError:null, pending:false};
+  persistSync(); renderSyncStatus();
+  toast("Cleared");
+});
+window.addEventListener("online", ()=>{ if(ghConfigured() && syncState.status==="error") queueSync(); });
+
+/* ============================================================
+   SHEETS / MENU
+   ============================================================ */
+function openSheet(name){
+  $("sheet-"+name).classList.add("show");
+  $("sheet-bg").classList.add("show");
+  if(name==="captures") renderCaptureList();
+  if(name==="tape") refreshAnchors();
+}
+function closeSheet(name){
+  if(name){ $("sheet-"+name).classList.remove("show"); }
+  else { qsa(".sheet").forEach(s=>s.classList.remove("show")); }
+  if(!qsa(".sheet.show").length) $("sheet-bg").classList.remove("show");
+}
+qsa(".close-sheet").forEach(b=>b.addEventListener("click", ()=>closeSheet(b.dataset.target)));
+$("sheet-bg").addEventListener("click", ()=>closeSheet());
+
+$("btn-captures").addEventListener("click", ()=>openSheet("captures"));
+$("btn-menu").addEventListener("click", ()=>openSheet("menu"));
+$("btn-sync").addEventListener("click", ()=>{
+  if(syncState.status==="error" || (ghConfigured() && caps.length>0 && !syncState.lastSyncTs)){ ghSync(); }
+  else openSheet("sync");
+});
+$("btn-help").addEventListener("click", ()=>{ closeSheet("menu"); openSheet("help"); });
+
+/* theme buttons */
+qsa("[data-theme-set]").forEach(b=>b.addEventListener("click", ()=>setTheme(b.dataset.themeSet)));
+
+/* gate + samples prefs */
+$("gate").value = prefs.gate || 5;
+$("psamples").value = prefs.psamples || 8;
+$("gate").addEventListener("input", ()=>{ gateVal = parseFloat($("gate").value)||5; prefs.gate=gateVal; save(LS_PREFS, prefs); refreshFixUI(); });
+$("psamples").addEventListener("input", ()=>{ prefs.psamples = parseInt($("psamples").value)||8; save(LS_PREFS, prefs); refreshCapButton(); });
+
+/* map controls */
+$("btn-fit").addEventListener("click", fitToData);
+$("btn-locate").addEventListener("click", ()=>{ if(!lastFix){ toast("No GPS fix","err"); return; } mapState.followMe=true; centerOnFix(); toast("Following you","info"); setTimeout(()=>{ mapState.followMe=false; }, 8000); });
+
+/* mode tabs */
+qsa("#mode-tabs button").forEach(b=>b.addEventListener("click", ()=>{
+  setMode(b.dataset.mode);
+  if(b.dataset.mode==="tape") openSheet("tape");
+}));
+
+/* capture button: dispatches by mode */
+$("btn-capture").addEventListener("click", async ()=>{
+  const m = captureState.mode;
+  if(!lastFix && m!=="tape"){
+    const ok = await startGPS();
+    if(ok){ $("gps-overlay").classList.add("hidden"); mapState.firstFix=true; refreshCapButton(); }
+    return;
+  }
+  if(m==="point"){ if(captureState.averaging) return; startAverage(); }
+  else if(m==="perim"||m==="line"){ dropVertexOrStart(); }
+  else if(m==="tape"){ openSheet("tape"); }
+});
+$("btn-undo").addEventListener("click", undoLast);
+$("btn-finish").addEventListener("click", finishShape);
+$("tp-go").addEventListener("click", computeTape);
+
+/* GPS overlay */
+$("btn-start-gps").addEventListener("click", async (e)=>{
+  e.stopPropagation();
+  const ok = await startGPS();
+  if(ok){ $("gps-overlay").classList.add("hidden"); refreshCapButton(); mapState.firstFix=true; }
+});
+$("gps-overlay").addEventListener("click", async ()=>{
+  const ok = await startGPS();
+  if(ok){ $("gps-overlay").classList.add("hidden"); refreshCapButton(); mapState.firstFix=true; }
+});
+
+/* ============================================================
+   UI BOOT
+   ============================================================ */
+function refreshUI(){ refreshFixUI(); refreshCapButton(); refreshMetaChips(); renderSyncStatus(); }
+gateVal = prefs.gate || 5;
+refreshGroupSelects();
+refreshMetaChips();
+renderCaptureList();
+refreshCapButton();
+ghLoadForm();
+renderSyncStatus();
+buildCompass();
+setBearing(0);
+resizeCanvas();
+mapDraw();
+
+// If GPS overlay should be hidden because we've used the app before (we have captures), still require explicit tap to start.
+// But hide it once GPS actually runs.
+
+
+/* GPS overlay: skip + auto-hide for returning users */
+$("btn-skip-gps").addEventListener("click", e=>{ e.preventDefault(); e.stopPropagation(); $("gps-overlay").classList.add("hidden"); });
+// If user already has captures, auto-hide overlay (they know what they're doing).
+if(caps.length > 0){ $("gps-overlay").classList.add("hidden"); }
+
+window.addEventListener("beforeunload", e=>{
+  if(captureState.shape && captureState.shape.vertices.length){ e.preventDefault(); e.returnValue=""; }
+});
+
 </script>
 </body>
 </html>
