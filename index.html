@@ -279,14 +279,14 @@ button{cursor:pointer;border:0;background:none}
     <div id="caphint">Tap <b>Start GPS</b> to begin</div>
   </div>
 
-  <button id="gps-overlay" style="cursor:pointer">
+  <div id="gps-overlay" role="dialog" aria-modal="true">
     <div>
       <h1>Field GPS</h1>
       <p>This app needs location access to capture points. Tap below and grant permission when iOS asks.</p>
       <button id="btn-start-gps">Start GPS</button>
       <div style="margin-top:18px"><a id="btn-skip-gps" href="#" style="color:var(--dim);font-size:13px;text-decoration:underline">Skip for now (view captures only)</a></div>
     </div>
-  </button>
+  </div>
 
 </div>
 
@@ -1606,7 +1606,9 @@ $("btn-start-gps").addEventListener("click", async (e)=>{
   const ok = await startGPS();
   if(ok){ $("gps-overlay").classList.add("hidden"); refreshCapButton(); mapState.firstFix=true; }
 });
-$("gps-overlay").addEventListener("click", async ()=>{
+$("gps-overlay").addEventListener("click", async (e)=>{
+  // only fire when the user taps the dim backdrop, not the inner controls
+  if(e.target.id !== "gps-overlay") return;
   const ok = await startGPS();
   if(ok){ $("gps-overlay").classList.add("hidden"); refreshCapButton(); mapState.firstFix=true; }
 });
