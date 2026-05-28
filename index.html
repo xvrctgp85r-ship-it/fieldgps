@@ -570,7 +570,8 @@ function setTheme(name){
   $("theme-dark").style.color      = (name==="dark") ? "#1a1400" : "var(--ink)";
   $("theme-sun").style.background  = (name==="sun")  ? "var(--accent)" : "var(--panel2)";
   $("theme-sun").style.color       = (name==="sun")  ? "#1a1400" : "var(--ink)";
-  if(window.mapDraw) mapDraw();
+  // (Map redraw is handled by the theme-button handlers explicitly to avoid
+  //  TDZ on mapState during the initial top-of-script setTheme() call.)
 }
 setTheme(load(LS_THEME, "dark"));
 
@@ -1566,7 +1567,7 @@ $("btn-sync").addEventListener("click", ()=>{
 $("btn-help").addEventListener("click", ()=>{ closeSheet("menu"); openSheet("help"); });
 
 /* theme buttons */
-qsa("[data-theme-set]").forEach(b=>b.addEventListener("click", ()=>setTheme(b.dataset.themeSet)));
+qsa("[data-theme-set]").forEach(b=>b.addEventListener("click", ()=>{ setTheme(b.dataset.themeSet); mapDraw(); }));
 
 /* gate + samples prefs */
 $("gate").value = prefs.gate || 5;
