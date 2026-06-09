@@ -1,0 +1,79 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "generated": "2026-06-09T08:09:24.740Z",
+    "count": 3,
+    "source": "bf-fieldgps-v3"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.3709473,
+          48.6249107
+        ]
+      },
+      "properties": {
+        "id": "mq6c32y42bma",
+        "group": "Gravel pit edges",
+        "label": "Gravel_pit_edges-01",
+        "type": "point",
+        "accuracy_m": 4.74,
+        "samples": 8,
+        "confidence": "good",
+        "note": "",
+        "utc": "2026-06-09T07:44:07.084Z",
+        "edited_utc": null,
+        "photo_data_url": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.3709639,
+          48.624914
+        ]
+      },
+      "properties": {
+        "id": "mq6c42fvp7oc",
+        "group": "Gravel pit edges",
+        "label": "Gravel_pit_edges-02",
+        "type": "point",
+        "accuracy_m": 8.41,
+        "samples": 8,
+        "confidence": "good",
+        "note": "",
+        "utc": "2026-06-09T07:44:53.083Z",
+        "edited_utc": null,
+        "photo_data_url": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.3709905,
+          48.6249231
+        ]
+      },
+      "properties": {
+        "id": "mq6czk9921vs",
+        "group": "Gravel pit edges",
+        "label": "Gravel_pit_edges-03",
+        "type": "point",
+        "accuracy_m": 4.82,
+        "samples": 8,
+        "confidence": "good",
+        "note": "",
+        "utc": "2026-06-09T08:09:22.509Z",
+        "edited_utc": null,
+        "photo_data_url": null
+      }
+    }
+  ]
+}
