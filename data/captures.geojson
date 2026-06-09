@@ -1,8 +1,8 @@
 {
   "type": "FeatureCollection",
   "metadata": {
-    "generated": "2026-06-09T08:09:31.460Z",
-    "count": 3,
+    "generated": "2026-06-09T08:18:21.867Z",
+    "count": 2,
     "source": "bf-fieldgps-v3"
   },
   "features": [
@@ -11,20 +11,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -112.3709473,
-          48.6249107
+          -112.3709429,
+          48.624897
         ]
       },
       "properties": {
-        "id": "mq6c32y42bma",
+        "id": "mq6d5ekuktsn",
         "group": "Gravel pit edges",
         "label": "Gravel_pit_edges-01",
         "type": "point",
-        "accuracy_m": 4.74,
+        "accuracy_m": 3.23,
         "samples": 8,
         "confidence": "good",
         "note": "",
-        "utc": "2026-06-09T07:44:07.084Z",
+        "utc": "2026-06-09T08:13:55.086Z",
         "edited_utc": null,
         "photo_data_url": null
       }
@@ -34,43 +34,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -112.3709639,
-          48.624914
+          -112.3709438,
+          48.6248974
         ]
       },
       "properties": {
-        "id": "mq6c42fvp7oc",
+        "id": "mq6d5kr31uz8",
         "group": "Gravel pit edges",
         "label": "Gravel_pit_edges-02",
         "type": "point",
-        "accuracy_m": 8.41,
+        "accuracy_m": 3.87,
         "samples": 8,
         "confidence": "good",
         "note": "",
-        "utc": "2026-06-09T07:44:53.083Z",
-        "edited_utc": null,
-        "photo_data_url": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -112.3709905,
-          48.6249231
-        ]
-      },
-      "properties": {
-        "id": "mq6czk9921vs",
-        "group": "Gravel pit edges",
-        "label": "Gravel_pit_edges-03",
-        "type": "point",
-        "accuracy_m": 4.82,
-        "samples": 8,
-        "confidence": "good",
-        "note": "",
-        "utc": "2026-06-09T08:09:22.509Z",
+        "utc": "2026-06-09T08:14:03.087Z",
         "edited_utc": null,
         "photo_data_url": null
       }
