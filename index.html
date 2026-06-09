@@ -85,7 +85,7 @@ button{cursor:pointer;border:0;background:none}
 .chip.cf-anchor{border-color:var(--blue);color:var(--blue)}
 .chip.cf-rough{border-color:var(--amber);color:var(--amber)}
 
-.mode-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px;background:var(--panel2);
+.mode-tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:10px;background:var(--panel2);
   border-radius:10px;padding:3px;border:1px solid var(--line)}
 .mode-tabs button{padding:8px 4px;font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--dim);
   border-radius:7px;background:transparent;text-transform:uppercase}
@@ -259,6 +259,7 @@ button{cursor:pointer;border:0;background:none}
       <button data-mode="point" aria-selected="true">● Point</button>
       <button data-mode="perim" aria-selected="false">▱ Area</button>
       <button data-mode="line"  aria-selected="false">／ Line</button>
+      <button data-mode="track" aria-selected="false">↝ Track</button>
       <button data-mode="tape"  aria-selected="false">↔ Tape</button>
     </div>
     <div id="capzone">
@@ -447,13 +448,13 @@ button{cursor:pointer;border:0;background:none}
     <h3>One-time setup</h3>
     <ol>
       <li>Open this page in iPhone <b>Safari</b>, tap <b>Share → Add to Home Screen</b>. Launch from the Home Screen icon to run offline.</li>
-      <li>Open <b>Settings (⚙) → GitHub Sync</b> (or tap the ⚡ icon). Fill in owner, repo, branch, path, and a fine-grained PAT. Tap <b>Test connection</b> → <b>Save</b>.</li>
+      <li>Open <b>Settings (⚙) → GitHub Sync</b>. Owner, repo, branch, and path are already filled in — just paste your <b>access token</b> once, tap <b>Test connection</b> → <b>Save</b>. This device remembers it; you won't enter it again unless you clear the browser.</li>
     </ol>
     <h3>Capturing</h3>
     <ol>
       <li>Tap the big <b>Start GPS</b> button on first launch. Grant permission. The accuracy badge in the top bar turns green when you're within the gate (default 5 m).</li>
       <li>Pick a <b>Group</b> chip and a <b>Confidence</b>. Tap the 📷 chip if you want a photo attached to the next capture.</li>
-      <li>Pick a mode: <b>● Point</b> averages 8 fixes for one precise spot. <b>▱ Area</b> / <b>／ Line</b> drop one vertex per tap of the big button — tap <b>✓</b> when done. <b>↔ Tape</b> opens the compass for offset-from-anchor.</li>
+      <li>Pick a mode: <b>● Point</b> averages 8 fixes for one precise spot. <b>▱ Area</b> / <b>／ Line</b> drop one vertex per tap of the big button — tap <b>✓</b> when done. <b>↝ Track</b> records continuously as you walk: tap <b>● REC</b>, walk the driveway/path, tap <b>■ STOP</b> at the end (good for curves). <b>↔ Tape</b> opens the compass for offset-from-anchor.</li>
       <li>Use <b>↶</b> to undo the last vertex (or the last point if no shape is in progress).</li>
     </ol>
     <h3>The map</h3>
@@ -531,7 +532,34 @@ const save=(k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){ t
 
 let groups = load(LS_GROUPS, PRESET_GROUPS.map(g=>g.name));
 let caps   = load(LS_CAPS, []);
-let gh     = load(LS_GH, {owner:"", repo:"", branch:"main", path:"data/captures.geojson", token:""});
+/* GitHub Sync defaults. This page is served publicly (GitHub Pages), so the
+   write TOKEN is NEVER embedded here — it would be world-readable. Only the
+   non-secret fields are pre-filled; the token is entered once per device in
+   Settings -> GitHub Sync and lives only in that browser's localStorage.
+   Any empty stored field (except token) is backfilled from these. */
+const GH_DEFAULTS = {
+  owner:  "xvrctgp85r-ship-it",
+  repo:   "fieldgps",
+  branch: "main",
+  path:   "data/captures.geojson",
+  token:  ""   // intentionally blank — paste your fine-grained PAT once per device
+};
+const LS_GH_CLEARED = "bf_gh_cleared_v1";   // set when the user explicitly clears settings
+let gh = (()=>{
+  const s = load(LS_GH, {});
+  // If the user explicitly cleared settings on this device, honor the empties — do NOT backfill the embedded default.
+  if(load(LS_GH_CLEARED, false)){
+    return {owner:s.owner||"", repo:s.repo||"", branch:s.branch||"main", path:s.path||"data/captures.geojson", token:s.token||""};
+  }
+  return {
+    owner:  s.owner  || GH_DEFAULTS.owner,
+    repo:   s.repo   || GH_DEFAULTS.repo,
+    branch: s.branch || GH_DEFAULTS.branch,
+    path:   s.path   || GH_DEFAULTS.path,
+    token:  s.token  || GH_DEFAULTS.token
+  };
+})();
+save(LS_GH, gh);
 let syncState = (()=>{ const p=load(LS_SYNC,{}); return {status:"off", lastSyncTs:p.lastSyncTs||null, lastError:null, pending:false}; })();
 let prefs = load(LS_PREFS, {gate:5, psamples:8, currentGroup:groups[0]||"", currentConf:"good"});
 
@@ -560,6 +588,9 @@ function fmtSync(ts){
     : d.toLocaleString([],{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"});
 }
 function escHTML(s){ return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+/* Only accept a strict base64 image data URL. Blocks a crafted "photo" value
+   (e.g. synced from the shared repo) from breaking out of a style url('…') and injecting markup/CSS. */
+function safePhotoURL(p){ return (typeof p==="string" && /^data:image\/[a-z0-9.+-]+;base64,[A-Za-z0-9+/=]+$/i.test(p)) ? p : ""; }
 
 /* ---------- THEME ---------- */
 function setTheme(name){
@@ -590,7 +621,7 @@ async function startGPS(){
       e=>{ toast("GPS: "+e.message,"err"); if(first){ first=false; stopGPS(); resolve(false); } },
       {enableHighAccuracy:true, maximumAge:0, timeout:15000}
     );
-    try{ if("wakeLock" in navigator) navigator.wakeLock.request("screen").then(w=>wakeLock=w).catch(()=>{}); }catch(e){}
+    try{ if("wakeLock" in navigator) navigator.wakeLock.request("screen").then(w=>wakeLock=w).catch(()=>{ if(captureState.tracking) toast("Couldn't keep the screen awake — it may sleep and pause GPS","err"); }); }catch(e){}
     setTimeout(()=>{ if(first){ first=false; resolve(false); } }, 18000);
   });
 }
@@ -601,16 +632,19 @@ function stopGPS(){
   refreshUI();
 }
 document.addEventListener("visibilitychange", async ()=>{
+  if(document.visibilityState==="hidden"){ saveTrackDraft(); return; }  // flush before iOS can discard the tab
   if(document.visibilityState==="visible" && watchId!==null && wakeLock===null){
     try{ if("wakeLock" in navigator){ wakeLock=await navigator.wakeLock.request("screen"); } }catch(e){}
   }
 });
+window.addEventListener("pagehide", saveTrackDraft);   // fires on iOS tab eviction where beforeunload does not
 function onFix(pos){
   const c=pos.coords;
   lastFix={lat:c.latitude, lon:c.longitude, acc:c.accuracy, ts:pos.timestamp};
   fixCount++;
   refreshFixUI();
   if(captureState.averaging) collectSample();
+  if(captureState.tracking) maybeAddTrackPoint();
   if(mapState.followMe) centerOnFix();
   else if(mapState.firstFix){ mapState.firstFix=false; centerOnFix(); }
   mapDraw();
@@ -769,7 +803,9 @@ function drawCaptures(){
   });
   // in-progress shape
   if(captureState.shape && captureState.shape.vertices.length){
-    ctx.strokeStyle = css("--red"); ctx.lineWidth=2; ctx.setLineDash([4,3]);
+    const isTrack = captureState.mode==="track";
+    ctx.strokeStyle = css("--red"); ctx.lineWidth = isTrack?2.8:2; ctx.lineCap="round"; ctx.lineJoin="round";
+    ctx.setLineDash(isTrack ? [] : [4,3]);
     ctx.beginPath();
     captureState.shape.vertices.forEach((v,i)=>{
       const p=llToXY(v.lat,v.lon);
@@ -777,13 +813,22 @@ function drawCaptures(){
     });
     if(lastFix){ const p=llToXY(lastFix.lat,lastFix.lon); ctx.lineTo(p.x,p.y); }
     ctx.stroke(); ctx.setLineDash([]);
-    // vertex dots
-    captureState.shape.vertices.forEach((v,i)=>{
-      const p=llToXY(v.lat,v.lon);
-      ctx.fillStyle=css("--red"); ctx.beginPath(); ctx.arc(p.x,p.y,3.5,0,Math.PI*2); ctx.fill();
-      ctx.fillStyle=css("--ink"); ctx.font="bold 9px ui-monospace,Menlo,monospace"; ctx.textAlign="center";
-      ctx.fillText(String(i+1), p.x, p.y-7);
-    });
+    if(isTrack){
+      // start dot (green) + current end dot (red) only — no numbers for a long walk
+      const vs=captureState.shape.vertices;
+      const s=llToXY(vs[0].lat,vs[0].lon);
+      ctx.fillStyle=css("--green"); ctx.beginPath(); ctx.arc(s.x,s.y,4,0,Math.PI*2); ctx.fill();
+      const e=llToXY(vs[vs.length-1].lat,vs[vs.length-1].lon);
+      ctx.fillStyle=css("--red"); ctx.beginPath(); ctx.arc(e.x,e.y,4,0,Math.PI*2); ctx.fill();
+    } else {
+      // vertex dots with numbers (Area / Line)
+      captureState.shape.vertices.forEach((v,i)=>{
+        const p=llToXY(v.lat,v.lon);
+        ctx.fillStyle=css("--red"); ctx.beginPath(); ctx.arc(p.x,p.y,3.5,0,Math.PI*2); ctx.fill();
+        ctx.fillStyle=css("--ink"); ctx.font="bold 9px ui-monospace,Menlo,monospace"; ctx.textAlign="center";
+        ctx.fillText(String(i+1), p.x, p.y-7);
+      });
+    }
   }
   // points
   caps.forEach(c=>{
@@ -885,8 +930,9 @@ cv.addEventListener("wheel", e=>{
    CAPTURE FLOW
    ============================================================ */
 let captureState = {
-  mode: "point",         // point | perim | line | tape
+  mode: "point",         // point | perim | line | track | tape
   averaging: false,
+  tracking: false,       // true while Track mode is recording a walked path
   samples: [],
   needSamples: prefs.psamples || 8,
   shape: null,           // {vertices:[]}
@@ -930,6 +976,19 @@ function refreshCapButton(){
     const need = m==="perim" ? 3 : 2;
     $("btn-finish").disabled = !(captureState.shape && n>=need);
     $("btn-finish").classList.toggle("go", captureState.shape && n>=need);
+  } else if(m==="track"){
+    const n = captureState.shape ? captureState.shape.vertices.length : 0;
+    if(captureState.tracking){
+      btn.disabled=false; icon.textContent="■"; lbl.textContent="STOP"; btn.classList.add("busy");
+      const len = n>=2 ? lineLenM(captureState.shape.vertices) : 0;
+      $("caphint").innerHTML = `Recording… <b>${n}</b> pts · <b>${len.toFixed(0)} m</b> — walk your path, tap <b>■ STOP</b> at the end`;
+      $("btn-finish").disabled = !(n>=2);
+      $("btn-finish").classList.toggle("go", n>=2);
+    } else {
+      btn.disabled=false; icon.textContent="●"; lbl.textContent="REC"; btn.classList.remove("busy");
+      $("caphint").innerHTML = "Tap <b>● REC</b>, then walk the path — it records you as you go.";
+      $("btn-finish").disabled = true; $("btn-finish").classList.remove("go");
+    }
   } else if(m==="tape"){
     btn.disabled = false; icon.textContent="↔"; lbl.textContent="TAPE";
     btn.classList.remove("busy");
@@ -942,8 +1001,14 @@ function refreshCapButton(){
 function setMode(m){
   captureState.mode = m;
   qsa("#mode-tabs button").forEach(b=>b.setAttribute("aria-selected", b.dataset.mode===m ? "true":"false"));
-  // Cancel any in-progress shape if switching out of perim/line
-  if(m!=="perim" && m!=="line" && captureState.shape){
+  // Leaving Track while still recording → stop and discard the unsaved trail
+  if(m!=="track" && captureState.tracking){
+    captureState.tracking = false; captureState.shape = null; clearTrackDraft(); toast("Track cancelled","err");
+  }
+  // Entering Track with a leftover line/area shape → start clean
+  if(m==="track" && captureState.shape && !captureState.tracking){ captureState.shape = null; }
+  // Cancel any in-progress shape if switching to a mode that can't use it
+  if(m!=="perim" && m!=="line" && m!=="track" && captureState.shape){
     if(captureState.shape.vertices.length>0){ toast("Shape cancelled","err"); }
     captureState.shape = null;
   }
@@ -1003,7 +1068,12 @@ function finishShape(){
   const m = captureState.mode; const kind = m==="perim" ? "polygon" : "line";
   const need = kind==="polygon" ? 3 : 2;
   const vtx = captureState.shape.vertices.slice();
-  if(vtx.length < need){ toast(`Need ≥${need} vertices`,"err"); return; }
+  if(vtx.length < need){
+    toast(`Need ≥${need} vertices`,"err");
+    if(m==="track"){ captureState.tracking=false; captureState.shape=null; clearTrackDraft(); refreshCapButton(); mapDraw(); }
+    return;
+  }
+  captureState.tracking = false;
   const worst = Math.max(...vtx.map(v=>v.acc));
   const g = prefs.currentGroup || groups[0];
   const rec = {
@@ -1016,9 +1086,69 @@ function finishShape(){
   caps.push(rec); save(LS_CAPS, caps);
   captureState.shape = null;
   captureState.pendingPhoto = null; captureState.pendingNote = "";
+  clearTrackDraft();
   refreshMetaChips(); renderCaptureList(); refreshCapButton(); mapDraw(); queueSync();
   const measure = kind==="polygon" ? "area "+polyAreaM2(vtx).toFixed(0)+" m²" : "length "+lineLenM(vtx).toFixed(1)+" m";
-  toast(`${kind==="polygon"?"Area":"Line"} saved · ${measure}`);
+  const what = kind==="polygon" ? "Area" : (m==="track" ? "Track" : "Line");
+  toast(`${what} saved · ${measure}`);
+}
+
+/* ---- TRACK (continuous walked path) ----
+   Noise filtering (balanced profile): reject fixes worse than TRACK_MAX_ACC_M,
+   require movement of max(TRACK_MIN_M, TRACK_ACC_FACTOR×accuracy) capped at
+   TRACK_STEP_CAP_M, and at least TRACK_MIN_DT_MS between points. This stops GPS
+   jitter from injecting zig-zag vertices and inflating the path length.
+   Crash safety: the in-progress trail is checkpointed to localStorage on every
+   accepted vertex so an iOS tab discard / reload can be recovered. */
+const TRACK_MIN_M       = 3.0;    // floor for the dynamic distance gate
+const TRACK_STEP_CAP_M  = 12.0;   // ceiling for the gate (only binds when accuracy is poor, where there's no real detail to lose anyway)
+const TRACK_ACC_FACTOR  = 0.8;    // dynamic gate = accuracy × this (must move ~most of your accuracy radius to count)
+const TRACK_MAX_ACC_M   = 15.0;   // drop fixes worse than this (open-driveway profile)
+const TRACK_MIN_DT_MS   = 2500;   // minimum time between recorded points (suppresses jitter bursts)
+const TRACK_MAX_FIXAGE_MS = 10000;// don't record against a fix older than this (stale GPS)
+const LS_TRACK_DRAFT    = "bf_track_draft_v1";
+
+function distM(lat1,lon1,lat2,lon2){
+  const dx=(lon2-lon1)*M_PER_DEG_LON, dy=(lat2-lat1)*M_PER_DEG_LAT;
+  return Math.hypot(dx,dy);
+}
+function saveTrackDraft(){ try{ if(captureState.tracking && captureState.shape && captureState.shape.vertices.length) save(LS_TRACK_DRAFT, captureState.shape); }catch(e){} }
+function clearTrackDraft(){ try{ localStorage.removeItem(LS_TRACK_DRAFT); }catch(e){} }
+
+function maybeAddTrackPoint(){
+  if(!lastFix) return;
+  // stale-fix guard: GPS may have stopped updating — don't append an old position
+  if(lastFix.ts && (Date.now() - lastFix.ts) > TRACK_MAX_FIXAGE_MS) return;
+  // accuracy ceiling: drop garbage fixes outright
+  if(lastFix.acc != null && lastFix.acc > TRACK_MAX_ACC_M) return;
+  if(!captureState.shape) captureState.shape = {vertices:[]};
+  const vs = captureState.shape.vertices;
+  if(vs.length){
+    const last = vs[vs.length-1];
+    // minimum time between points (suppresses noisy bursts)
+    if(last.ts && lastFix.ts && (lastFix.ts - last.ts) < TRACK_MIN_DT_MS) return;
+    // dynamic distance gate: stricter when the fix is noisier
+    const minStep = Math.min(TRACK_STEP_CAP_M, Math.max(TRACK_MIN_M, (lastFix.acc||0) * TRACK_ACC_FACTOR));
+    if(distM(last.lat,last.lon,lastFix.lat,lastFix.lon) < minStep) return;
+  }
+  vs.push({lat:+lastFix.lat.toFixed(7), lon:+lastFix.lon.toFixed(7), acc:+lastFix.acc.toFixed(2), ts:lastFix.ts});
+  saveTrackDraft();
+  refreshCapButton(); mapDraw();
+}
+function startTrack(){
+  if(!lastFix){ toast("No GPS fix","err"); return; }
+  if(lastFix.acc != null && lastFix.acc > TRACK_MAX_ACC_M){ toast(`GPS weak (±${lastFix.acc.toFixed(0)} m) — wait for a better fix`,"err"); return; }
+  if(!("wakeLock" in navigator)) toast("Keep the screen on while recording — auto-lock can pause GPS","info");
+  captureState.shape = {vertices:[]};
+  captureState.tracking = true;
+  maybeAddTrackPoint();          // drop the starting point immediately
+  toast("Recording — walk your path");
+  refreshCapButton(); mapDraw();
+}
+function stopTrackAndSave(){
+  const n = captureState.shape ? captureState.shape.vertices.length : 0;
+  if(n < 2){ captureState.tracking=false; captureState.shape=null; clearTrackDraft(); toast("Track too short — need to walk a bit","err"); refreshCapButton(); mapDraw(); return; }
+  finishShape();                 // saves as a LineString, clears tracking + draft
 }
 
 /* ---- UNDO ---- */
@@ -1193,8 +1323,9 @@ function renderCaptureList(){
     const items = byG[g].slice().reverse();
     html += `<div class="cap-grp"><div class="cap-grp-hdr">${escHTML(g)}<span class="ct">${byG[g].length}</span></div>`;
     items.forEach(c=>{
-      const thumb = c.photo
-        ? `<div class="thumb" style="background-image:url('${c.photo}')"></div>`
+      const ph = safePhotoURL(c.photo);
+      const thumb = ph
+        ? `<div class="thumb" style="background-image:url('${ph}')"></div>`
         : `<div class="thumb">${c.type==="point"?"●":c.type==="line"?"／":"▱"}</div>`;
       const detail = c.type==="point"
         ? `${c.lat.toFixed(6)}, ${c.lon.toFixed(6)} · ±${c.acc}m${c.samples?` · n=${c.samples}`:""}`
@@ -1228,7 +1359,8 @@ function openEdit(id){
   $("ed-group").value = c.group;
   $("ed-conf").value = c.confidence;
   $("ed-note").value = c.note || "";
-  if(c.photo){ $("ed-thumb").style.backgroundImage = `url("${c.photo}")`; $("ed-thumb").textContent=""; $("ed-thumb").dataset.photo = c.photo; }
+  const edPh = safePhotoURL(c.photo);
+  if(edPh){ $("ed-thumb").style.backgroundImage = `url("${edPh}")`; $("ed-thumb").textContent=""; $("ed-thumb").dataset.photo = edPh; }
   else { $("ed-thumb").style.backgroundImage = ""; $("ed-thumb").textContent="—"; $("ed-thumb").dataset.photo = ""; }
   openSheet("edit");
 }
@@ -1517,6 +1649,7 @@ $("gh-save").addEventListener("click", ()=>{
     token: newTok || gh.token
   };
   save(LS_GH, gh);
+  save(LS_GH_CLEARED, false);   // user re-entered config — allow normal behavior again
   ghLoadForm(); renderSyncStatus();
   toast(ghConfigured() ? "Settings saved" : "Saved (fill all fields to enable sync)");
 });
@@ -1532,9 +1665,11 @@ $("gh-test").addEventListener("click", async ()=>{
 });
 $("gh-sync-now").addEventListener("click", ghSync);
 $("gh-clear").addEventListener("click", ()=>{
-  if(!confirm("Clear sync settings (including token)?")) return;
+  if(!confirm("Clear sync settings on this device, including the token?\n\nUploads will stop until you re-enter them. (This sticks — it won't refill from the built-in default on reload.)")) return;
   gh = {owner:"", repo:"", branch:"main", path:"data/captures.geojson", token:""};
-  save(LS_GH, gh); ghLoadForm();
+  save(LS_GH, gh);
+  save(LS_GH_CLEARED, true);    // sticky: suppress the embedded-default backfill on next load
+  ghLoadForm();
   syncState = {status:"off", lastSyncTs:null, lastError:null, pending:false};
   persistSync(); renderSyncStatus();
   toast("Cleared");
@@ -1595,6 +1730,7 @@ $("btn-capture").addEventListener("click", async ()=>{
   }
   if(m==="point"){ if(captureState.averaging) return; startAverage(); }
   else if(m==="perim"||m==="line"){ dropVertexOrStart(); }
+  else if(m==="track"){ if(captureState.tracking) stopTrackAndSave(); else startTrack(); }
   else if(m==="tape"){ openSheet("tape"); }
 });
 $("btn-undo").addEventListener("click", undoLast);
@@ -1640,8 +1776,24 @@ $("btn-skip-gps").addEventListener("click", e=>{ e.preventDefault(); e.stopPropa
 if(caps.length > 0){ $("gps-overlay").classList.add("hidden"); }
 
 window.addEventListener("beforeunload", e=>{
-  if(captureState.shape && captureState.shape.vertices.length){ e.preventDefault(); e.returnValue=""; }
+  if(captureState.shape && captureState.shape.vertices.length){ saveTrackDraft(); e.preventDefault(); e.returnValue=""; }
 });
+
+/* Recover an in-progress Track that was interrupted (iOS tab discard / reload / crash). */
+(function restoreTrackDraft(){
+  const d = load(LS_TRACK_DRAFT, null);
+  if(!d || !d.vertices || !d.vertices.length) return;
+  const len = d.vertices.length>=2 ? lineLenM(d.vertices).toFixed(0) : "0";
+  if(confirm(`Resume the unsaved track from your last session?\n\n${d.vertices.length} points · ~${len} m\n\nOK = keep recording (tap ■ STOP to save)\nCancel = discard it`)){
+    setMode("track");
+    captureState.shape = d;
+    captureState.tracking = true;
+    refreshCapButton(); mapDraw();
+    toast("Track restored — tap ■ STOP to save, or keep walking","info");
+  } else {
+    clearTrackDraft();
+  }
+})();
 
 </script>
 </body>
