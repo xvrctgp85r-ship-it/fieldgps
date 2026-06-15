@@ -1177,15 +1177,15 @@
       },
       "properties": {
         "id": "mqeoakm2hfku",
-        "group": "Gravel pit edges",
-        "label": "Gravel_pit_edges-03",
+        "group": "Driveway",
+        "label": "Driveway-01",
         "type": "line",
         "accuracy_m": 4.75,
         "samples": 279,
         "confidence": "good",
         "note": "",
         "utc": "2026-06-15T03:48:01.371Z",
-        "edited_utc": null,
+        "edited_utc": "2026-06-15T06:03:02.220Z",
         "photo_data_url": null
       }
     }
